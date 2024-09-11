@@ -16,7 +16,7 @@ tags:
 
 3.主机模式:独立的系统 （不与外界网络连接，想怎么配，怎么配）
 
-![image-20240902111447613](Linux入门/image-20240902111447613-17252468906061.png)
+![image-20240902111447613](Linux入门/image-20240902111447613.png)
 
 ## 2.虚拟机克隆
 
@@ -432,7 +432,7 @@ help指令
 >
 > cal 2024   :展示2024的1-12的日历
 
-## 17.查找指令
+## 17.查找指令-find-locate -which-grep  
 
 > find    find指令将从指定目录向下递归地遍历其各个子目录，将满足条件的文件或者目录显示在终端。
 >
@@ -448,14 +448,20 @@ help指令
 >
 > ​	find / -size +200M    查找整个linux大于200M的文件  （+大于 -小于 不写则是等于  ，单位有k,M,G）
 
+
+
 > locate  :locate指令可以快速定位文件路径。locate指令利用事先建立的系统中所有文件名称及路径的locate数据库实现快速定位给定的文件。Locate指令无需遍历整个文件系统，查询速度较快。为了保证查询结果的准确度，**管理员必须定期更新locate时刻**
 >
 > 基本语法
 > locate 搜索文件
 > 特别说明
-> 由于locate指令基于数据库进行查询，所以**第一次运行前，必须使用`updatedb`指令创建locate数据库**,
+> 由于locate指令基于数据库进行查询，所以**第一次运行前，必须使用`updatedb`指令创建locate数据库**
+
+
 
 > which   ：可以查看某个指令在那个目录下  例如ls  which ls
+
+
 
 > grep 和管道符号  |
 >
@@ -507,27 +513,33 @@ help指令
 >
 >语法：
 >
->​	tar 选项  xx.tar.gz  打包内容
+>​	`tar 选项  xx.tar.gz  打包内容`
 >
 >​	选项
 >
->​		-c 产生打包文件
+>​		-c 产生打包文件，产生`.tar`打包文件
 >
 >​		-v 显示详细信息
 >
->​		-f	指定压缩后的文件
+>​		-f	指定压缩后的文件，这个选项是必须的，指定操作涉及的文件名
 >
->​		-z	打包同时压缩
+>​		-z	打包同时压缩，调用 giz，文件后缀是`.gz`
 >
->​		-x	解包.tar文件
+>​		-x	解包.tar文件，解包`.tar`文件
+>
+>​		-j     调用 bzip2，文件后缀是`.bz2`
+>
+>​		-Z    调用 compress，文件后缀是`.Z`
 >
 >![image-20240904160759353](Linux入门/image-20240904160759353-172543728058120.png)
 >
 >案例：
 >
->tar -zxvf   xxx.tar.gz  -C /opt  解压缩到/opt
+>`tar -zxvf   xxx.tar.gz  -C /opt`  解压缩到/opt
 >
->tar -zcvf	pc.tar.gz  /home/xxx/a.txt  /home/xxx/b.txt   打包
+>`tar -zcvf	pc.tar.gz  /home/xxx/a.txt  /home/xxx/b.txt `  打包
+>
+>**举一反三就有`tar -jcvf`，`tar -jxvf`，`tar -Zcvf`和`tar -Zxvf`等等**
 
 ------
 
@@ -1650,7 +1662,7 @@ systemctl管理指令
 > - 2.如果我们就是要删除 foo这个rpm 包，可以增加参数 --nodeps,就可以强制删除，但是一般不推荐这样做，因为依赖于该软件包的程序可能无法运行
 >   - 如: `rpm -e --nodeps foo`
 
-## 5.安装rpm3
+### 5.安装rpm
 
 安装rpm包
 
@@ -1693,3 +1705,888 @@ systemctl管理指令
 >   - `rpm -e firefox`     #先删除已有的firefox
 >   - `rpm list | grep firefox `    #查看yum服务上有那些firefox
 >   - `yum install firefox`    #下载安装想要的版本
+
+# 安装java环境
+
+### 1.jdk
+
+> 1.`mkdir /opt/jdk`
+>
+> 2.将jdk包通过xftp6 上传到 /opt/jdk下
+>
+> 3.`cd /opt/jdk`
+>
+> 4.解压 `tar -zxvf jdk-8u261-linux-x64.tar.gz`
+>
+> 5.`mkdir /usr/local/java`
+>
+> 6.`mv /opt/jdk/jdk1.8.0_261 /usr/local/java`
+>
+> 7.配置环境变量的配置文件  `vim /etc/profile`
+>
+> 8.再配置文件的最后面输入下面内容
+>
+> ```
+> export JAVA_HOME=/usr/local/java/jdk1.8.0 261
+> export PATH=$JAVA_HOME/bin:$PATH
+> ```
+>
+> 9.`source /etc/profile`  [让新的环境变量生效]
+
+### 2.tomcat8
+
+### 3.idea2020
+
+### 4.mysql5.7
+
+> **注：centos7.6自带的类mysql数据库是mariadb，会跟 mysql冲突，要先删除**
+>
+> - `rpm -qa | grep mari`
+> - `rpm -e --nodeps mariadb-libs`
+
+# 大数据-shell编程
+
+## 1.入门
+
+> shell是什么
+>
+> > Shell是一个命令行解释器，它为用户提供了一个向Linux内核发送请求以便运行程序的界面系统级程序用户可以用Shell来启动、挂起、停止甚至是编写一些程序。看一个示意图
+> >
+> > ![image-20240910142303731](Linux入门/image-20240910142303731.png)
+
+
+
+> Shell脚本的执行方式
+>
+> 1.脚本格式要求
+>
+> - 脚本以#!/bin/bash开头
+> - 脚本需要有可执行权限
+>
+> 
+>
+> 2.编写第一个Shell脚本
+>
+> - 需求说明:创建一个Shell脚本，输出hello world!
+>
+>   - ```shell
+>     #!/bin/bash
+>     echo "hello,world~"
+>     ```
+>
+> 3.脚本的常用执行方式
+>
+> - 方式1(输入脚本的绝对路径或相对路径)
+>   - 说明:首先要赋予helloworld.sh 脚本的+x权限(`chmod u+x xxx.sh`)，再执行脚本。如：`./xxx.sh`  或  `/root/shcode/xxx.sh`
+>
+> - 方式2(sh+脚本)说明:不用赋予脚本+x权限，直接执行即可。如：`sh xxx.sh`
+
+## 2.Shell 变量
+
+1.Shell变量
+
+> 1.Shell变量
+>
+> - 介绍Linux Shell中的变量分为，系统变量和用户自定义变量
+>
+> - 系统变量:`$HOME、$PWD、$SHELL、$USER`等等，比如:`echo $HOME `等等
+>
+> - 显示当前shell中所有变量:`set`
+>
+> 2.shell变量的定义
+>
+> - 基本语法
+>
+>   - 定义变量:变量=值
+>
+>   - 撤销变量:`unset 变量`.
+>
+>   - 声明静态变量:`readonly 变量 `，注意：不能`unset`
+>
+> - 快速入门
+>
+>   - 案例1:定义变量A
+>
+>   - 案例2:撤销变量A
+>
+>   - 案例3:声明静态的变量B=2，不能unset
+>
+>     - ```shell
+>       #案例一
+>       A=100
+>       echo A=$A
+>       #案例二
+>       unset A
+>       echo A=$A
+>       #案例三
+>       #不能unset B
+>       readonly B=2
+>               
+>       ```
+>
+>   - 案例4:可把变量提升为全局环境变量，可供其他shel程序使用[该案例后面讲]
+
+2.shell变量的定义
+
+> 1.定义变量的规则
+>
+> - 变量名称可以由字母、数字和下划线组成，但是不能以数字开头。5A=200(x)
+>
+> - 等号两侧不能有空格
+> - 变量名称一般习惯为大写
+>
+> 2.将**命令**的返回值赋给变量
+>
+> - A=\`date\`反引号，运行里面的命令，并把结果返回给变量A
+>
+> - A=$(date)等价于反引号
+
+## 3.设置环境变量
+
+入门
+
+> 1.基本语法
+>
+> - 1.export 变量名=变量值   (功能描述:将shell变量输出为环境变量/全局变量)
+>
+> - 2.source 配置文件   (功能描述:让修改后的配置信息立即生效)
+>
+> - 3.echo $变量名    (功能描述:查询环境变量的值)
+>
+> 2.快速入门
+>
+> - 1.在`/etc/profile`文件中定义TOMCAT_HOME环境变量
+>
+> - 2.查看环境变量TOMCAT HOME的值
+>
+> - 3.在另外一个shell程序中使用 TOMCAT_HOME
+>
+> 注意:在输出TOMCAT_HOME 环境变量前，需要让其生效
+>
+> `source /etc/profile`
+>
+> 3.为什么设置环境变量（看图）
+>
+> ![image-20240910145933992](Linux入门/image-20240910145933992.png)
+>
+> 4.注释
+>
+> - 单行注释：`#`
+>
+> - 多行注释：`:<<!`  `!` 必须单独一行
+>
+>   - ```shell
+>     :<<!
+>     内容~
+>     !
+>     ```
+>
+>     
+
+## 4.位置参数变量
+
+> 1.介绍
+>
+> > 当我们执行一个shel脚本时，如果希望获取到命令行的参数信息，就可以使用到**位置参数变量**
+> >
+> > 比如 :`./myshell.sh 100 200`,这个就是一个执行shell的命令行，可以在myshell 脚本中获取到参数信息
+>
+> 2.基本语法
+>
+> - `$n` (功能描述:n为数字，$0代表命令本身，$1-$9代表第一到第九个参数，十以上的参数，十以上的参数需要用大括号包含，如${10})
+>
+> - `$*`(功能描述:这个变量代表命令行中所有的参数，$*把所有的参数看成一个整体,所以循环的时候是一次)
+>
+> - `$@`(功能描述:这个变量也代表命令行中所有的参数，不过`$@`把每个参数区分对待，这里是有多少循环多少)
+>
+> - `$#`(功能描述:这个变量代表命令行中所有参数的个数)
+>
+> 3.位置参数变量
+>
+> 案例:编写一个shell脚本 position.sh ，在脚本中获取到命令行的各个参数信息。
+>
+> ```shell
+> #!/bin/bash
+> echo "0=$0 1=$1 2=$2"
+> echo "所有参数=$*"
+> echo "$@"
+> echo "参数的个数=$#"
+> ```
+>
+> 
+
+## 5.预定义变量
+
+介绍（用的不多）
+
+>1.基本介绍
+>
+>> 就是shell设计者事先已经定义好的变量，可以直接在shel脚本中使用
+>
+>2.基本语法
+>
+>- `$$`   (功能描述:当前进程的进程号(PID))
+>
+>- `$!`    (功能描述:后台运行的最后一个进程的进程号(PID))
+>
+>- `$?`    (功能描述:最后一次执行的命令的返回状态。如果这个变量的值为0，证明上一个命令正确执行如果这个变量的值为非0(具体是哪个数，由命令自己来决定)，则证明上一个命令执行不正确了。)
+>
+>3.应用实例
+>
+>- 在一个shell脚本中简单使用一下预定义变量
+>  - ![image-20240910155833833](Linux入门/image-20240910155833833.png)
+>
+>
+
+## 6.运算符
+
+> 1.基本介绍
+>
+> > 学习如何在shel中进行各种运算操作。
+>
+> 2.基本语法
+>
+> - 1.`$((运算式))`或`$[运算式]`或者 `expr m + n `        #其中expr是expression这个单词的缩写，中文是表达式的意思
+>   - 注意expr运算符间要有空格，如果希望将 expr 的结果赋给某个变量，使用\`\`
+>
+> - 3.`expr m - n`
+>
+> - 4.`expr`  `\*`，`/`，`% `      #分别是==》**乘**（要注意），除，取余
+>
+> 3.应用实例
+>
+> - 案例1:计算(2+3*4的值
+> - 案例2:请求出命令行的两个参数[整数]的和
+>   - ![image-20240910161209247](Linux入门/image-20240910161209247.png)
+
+## 7.条件判断
+
+1.判断语句
+
+> 1.基本语法
+>
+> - `[ condition ]`(注意condition前后要有空格)  
+>   - #condition 为你输入的条件，非空返回true，可使用$?验证(0为true，>1为false)
+>
+> 应用实例
+>
+> - [ hspEdu ]    这个条件返回true
+> - \[ \]					这个条件返回false
+> - `[ condition  ] && echo OK || echo notok`    条件满足，执行后面的语句
+>   - 例如：确保备份目录存在,创建备份目录，如果不存在，就创建`[ ! -d "${BACKUP}/${DATETIME}" ] && mkdir -p "${BACKUP}/${DATETIME}"`
+
+2.条件判断
+
+> 1.判断语句常用判断条件
+>
+> - 1.= 字符串比较
+>
+> - 2.两个整数的比较
+>   - -lt 小于
+>   - -le 小于等于    # little equal的简写
+>   - -eq 等于-gt 大于
+>   - -ge 大于等于
+>   - -ne 不等于
+>
+> - 3.按照文件权限进行判断
+>   - -r 有读的权限
+>   - -w 有写的权限
+>   - -x 有执行的权限
+> - 4.按照文件类型进行判断
+>   - -f  文件存在并且是一个常规的文件
+>   - -e  文件存在
+>   - -d  文件存在并是一个目录
+>
+> 2.应用实例
+>
+> - 案例1:"@k"是否等于"ok”
+>   - 判断语句:  使用 `=`
+> - 案例2:23是否大于等于22
+>   - 判断语句: 使用 `-ge`
+> - 案例3:/root/shcode/aaa.txt目录中的文件是否存在
+>   - 判断语句: 使用 `-f`
+> - 上面案例的结果
+>   - ![image-20240910163042552](Linux入门/image-20240910163042552.png)
+
+## 8.单分支多分支
+
+1.流程控制
+
+> 1.if 判断  基本语法
+>
+> ```shell
+> if [ 条件判断式 ]
+> then
+> 程序
+> fi
+> ```
+>
+> 或多分支
+>
+> ```shell
+> if [ 条件判断式 ]
+> then
+> 程序
+> elif [ 条件判断式 ]
+> then
+> 程序
+> fi
+> ```
+>
+> 
+>
+> 2.注意事项:
+>
+> - (1)[条件判断式]，中括号和条件判断式之间必须有空格
+>
+> - (2)推荐使用第二种方式
+>
+> 3.应用实例
+>
+> - 案例:请编写-一个shell程序，如果输入的参数，大于等于60，则输出"及格了",如果小于60,则输出不及格
+>   - ![image-20240910164143965](Linux入门/image-20240910164143965.png)
+>
+> 
+
+
+
+## 9.case语句
+
+> case语句是基本语法
+>
+> ```shell
+> case $变量名 in
+> "值1”)
+> 如果变量的值等于值1，则执行程序1
+> ;;
+> "值2”)
+> 如果变量的值等于值2，则执行程序2
+> ;;
+> *)
+> 如果变量的值都不是以上的值，则执行此程序
+> ;;
+> esac
+> ```
+>
+> 应用实例 testCase.sh
+>
+> - 案例1 :当命令行参数是 1 时，输出"周一",是2 时，就输出"周二"，其它情况输出“other”
+>   - ![image-20240910164808477](Linux入门/image-20240910164808477.png)
+
+## 10.for循环
+
+for循环
+
+> 1.基本语法1，这个是一些具体值循环
+>
+> ```shell
+> for 变量 in 值1 值2 值3..
+> do
+> 程序
+> done
+> ```
+>
+> 2.应用实例 
+>
+> - 案例1:打印命令行输入的参数  [**这里可以看出`$* `和` $@ `的区别**]
+>   - ![image-20240910165433283](Linux入门/image-20240910165433283.png)
+>
+> 
+>
+> 3.基本语法2，条件是一个范围
+>
+> ```shell
+> for((初始值;循环控制条件;变量变化 ))
+> do
+> 程序
+> done
+> ```
+>
+> 4.应用实例 
+>
+> - 案例1:从1加到100的值输出显示
+>   - ![image-20240910165853874](Linux入门/image-20240910165853874.png)
+
+## 11.while循环
+
+> while循环
+> 基本语法
+>
+> - ```shell
+>   while [ 条件判断式 ]do
+>   程序
+>   done
+>   ```
+>
+> - 注意：`while`和`[`有空格，条件判断式和`[`也有空格
+>
+> 应用实例
+>
+> - 案例1 :从命令行输入一个数n，统计从 1+..+n 的值是多少?
+>
+>   - ```shell
+>     #!/bin/bash
+>     SUM=0
+>     i=0
+>     while [ $i -le $1 ]
+>     do
+>     	SUM=$[$SUM+$I]
+>     	i=$[$i+1]
+>     done
+>     echo "执行结束=$SUM"
+>     ```
+
+## 12.read获取输入
+
+> read读取控制台输入
+
+> 1.基本语法
+>
+> - read(选项)(参数)
+>
+> 2.选项:
+>
+> - -p:指定读取值时的提示的内容;
+> - -t:指定读取值时等待的时间(秒)，如果没有在指定的时间内输入，就不再等待了
+>
+> 3.参数
+>
+> - 变量:指定读取值的变量名
+>
+> 4.应用实例
+>
+> - 案例1:读取控制台输入一个num值
+> - 案例2:读取控制台输入一个num值，在10秒内输入。
+>   - ![image-20240911095034654](Linux入门/image-20240911095034654.png)
+
+## 13.系统函数
+
+函数介绍
+
+> 1.介绍
+>
+> > shell编程和其它编程语言一样，有系统函数，也可以自定义函数。系统函数中，我们这里就介绍两个。
+>
+> 2.系统函数(可以用到shell脚本中)
+>
+> - basename基本语法
+>
+>   - 功能:返回完整路径最后/的部分，**常用于获取文件名**
+>
+>   - `basename  [pathname] [suffix]`
+>
+>   - `basename [string] [suffix]`
+>     - (功能描述:basename命令会删掉所有的前缀包括最后个('/’)字符，然后将字符串显示出来。
+>
+> 3.选项:
+>
+> - pathname/string，为我们想要处理的路径/字符串
+>
+> - suffix为后缀，如果suffix被指定了，basename会将pathname或string中的suffix去掉
+>
+> 4.应用实例
+>
+> > 案例1:请返回 /home/aaa/test.txt 的"test.txt"部分
+>
+> - ![image-20240911100007185](Linux入门/image-20240911100007185.png)
+
+> dirname基本语法
+>
+> 功能:返回完整路径最后/的前面的部分，**常用于返回路径部分**
+>
+> dirname 文件绝对路径(功能描述:从给定的包含绝对路径的文件名中去除文件名(非目录的部分)，然后返回剩下的路径(目录的部分))
+>
+> 应用实例
+>
+> 案例1:请返回/home/aaa/test.txt的/home/aaa
+>
+> ![image-20240911100249291](Linux入门/image-20240911100249291.png)
+
+## 14.自定义函数
+
+> 自定义函数基本语法
+>
+> ```shell
+> [ function ] funname[0]
+> {
+> 	程序;
+> 	[return int;]
+> }
+> 
+> #调用直接写函数名:funname [值]
+> ```
+>
+>
+> 应用实例
+>
+> - 案例1:计算输入两个参数的和，getsum
+>
+>   - ```shell
+>     function getsum()
+>     {
+>     	SUM=$[$n1+$n2];
+>     	echo "和是=$SUM"
+>     }
+>             
+>     read -p ”请输入一个数 n1=“ n1
+>     read -p ”请输入一个数 n2=“ n2
+>     #调用
+>     getSUM $n1 $n2
+>     ```
+>
+>   - ![image-20240911102511054](Linux入门/image-20240911102511054.png)
+
+## 15.写一个定时备份数据库脚本
+
+> 1.需求分析
+>
+> - 1.每天凌晨 2:30 备份 数据库 hspEduDB到 /data/backup/db
+>
+> - 2.备份开始和备份结束能够给出相应的提示信息
+>
+> - 3.备份后的文件要求以备份时间为文件名，并打包成.tar.gz的形式，比如:2021-03-12 230201.tar.gz
+>
+> - 4.在备份的同时，检查是否有10天前备份的数据库文件，如果有就将其删除。
+>
+> 2.思路分析图
+>
+> - ![image-20240911103014606](Linux入门/image-20240911103014606.png)
+>
+> - 将脚本放到`/usr/sbin`目录下，因为这个目录是root执行的权限，而任务调度也是root用户，所以放到这个目录中
+>
+>   - 1.脚本如下
+>
+>     - ```shell
+>       #!/bin/bash
+>       #备份目录
+>       BACKUP=/data/backup/db
+>       #当前时间
+>       DATETIME=$(date +%Y-%m-%d_%H%M%S)
+>       #数据库地址
+>       HOST=localhost
+>             #数据库用户名
+>       DB_USER=root
+>       #数据库密码
+>       DB_PW=123456
+>       #备份的数据库名
+>       DATABASE=test
+>           
+>       #创建备份目录，如果不存在，就创建
+>       [ ! -d "${BACKUP}/${DATETIME}" ] && mkdir -p "${BACKUP}/${DATETIME}"
+>                 
+>       #备份数据库(这里有风险，数据库密码泄露)
+>       mysqldump -u${DB_USER} -p${DB_PW} --host=${HOST} -q -R --databases ${DATABASE} | gzip > ${BACKUP}/${DATETIME}/$DATETIME.sql.gz
+>                 
+>       #将文件处理成 tar.gz
+>       cd ${BACKUP}
+>             tar -zcvf $DATETIME.tar.gz ${DATETIME}
+>       #删除对应的备份目录
+>       rm -rf ${BACKUP}/${DATETIME}
+>                 
+>       #删除10天前的备份文件
+>       find ${BACKUP} -mtime +10 -name "*.tar.gz" -exec rm -rf {} \;
+>       echo "${DATETIME}===开始备份数据库===${DATABASE}====成功"
+>       ```
+>     
+>         - 2.设置循环执行命令
+>   
+>   - crontab -e 
+>   
+>   - `30 2 * * * /usr/sbin/mysql_db_backup.sh`
+
+脚本参考：
+
+> 多了每次的日志信息
+
+```shell
+#!/bin/bash
+#备份目录
+BACKUP=/data/backup/db
+# 日志文件
+LOGFILE=${BACKUP}/backup.log
+#当前时间
+DATETIME=$(date +%Y-%m-%d_%H%M%S)
+
+#数据库地址
+HOST=localhost
+#数据库用户名
+DB_USER=root
+#数据库密码
+DB_PW=123456
+#备份的数据库名
+DATABASE=mydatebase
+
+#创建备份目录，如果不存在，就创建
+[ ! -d "${BACKUP}/${DATETIME}" ] && mkdir -p "${BACKUP}/${DATETIME}"
+
+#将所有输出（包括错误信息）记录到日志文件中
+exec > >(tee -a ${LOGFILE}) 2>&1
+
+#备份数据库(这里有风险，数据库密码泄露)
+mysqldump -u${DB_USER} -p${DB_PW} --host=${HOST} -q -R --databases ${DATABASE} | gzip > ${BACKUP}/${DATETIME}/$DATETIME.sql.gz
+
+#将文件处理成 tar.gz
+cd ${BACKUP}
+tar -zcvf $DATETIME.tar.gz ${DATETIME}
+#删除对应的备份目录
+rm -rf ${BACKUP}/${DATETIME}
+
+#删除10天前的备份文件
+find ${BACKUP} -mtime +10 -name "*.tar.gz" -exec rm -rf {} \;
+echo "${DATETIME}===开始备份数据库===${DATABASE}====成功"
+```
+
+脚本2
+
+```shell
+#!/bin/bash
+
+# 配置部分
+BACKUP_DIR="/data/backup/db"
+LOG_FILE="${BACKUP_DIR}/backup.log"
+DATETIME=$(date +%Y-%m-%d_%H%M%S)
+HOST="localhost"
+DB_USER="root"
+DB_PW_FILE="/opt/db_password_file" # 需要确保该文件权限安全,存放密码的地方
+DATABASE="mydatabase"
+RETENTION_DAYS=10
+
+# 确保备份目录存在,创建备份目录，如果不存在，就创建
+[ ! -d "${BACKUP}/${DATETIME}" ] && mkdir -p "${BACKUP}/${DATETIME}"
+
+# 将所有输出（包括错误信息）记录到日志文件中
+exec > >(tee -a "${LOG_FILE}") 2>&1
+
+# 检查密码文件是否存在
+if [ -f "${DB_PW_FILE}" ]; then
+    DB_PW=$(cat "${DB_PW_FILE}")
+else
+    DB_PW=""
+fi
+
+# 备份数据库
+echo "${DATETIME} - 开始备份数据库 ${DATABASE}..."
+if [ -z "${DB_PW}" ]; then
+    # 如果密码为空，则不使用 -p 选项
+    mysqldump -u"${DB_USER}" --host="${HOST}" -q -R --databases "${DATABASE}" | gzip > "${BACKUP_DIR}/${DATETIME}.sql.gz"
+else
+    # 如果密码不为空，则使用 -p 选项
+    mysqldump -u"${DB_USER}" -p"${DB_PW}" --host="${HOST}" -q -R --databases "${DATABASE}" | gzip > "${BACKUP_DIR}/${DATETIME}.sql.gz"
+fi
+
+if [ $? -ne 0 ]; then
+    echo "${DATETIME} - 数据库备份失败！"
+    exit 1
+fi
+
+# 创建 tar.gz 包
+echo "${DATETIME} - 创建备份包..."
+tar -zcvf "${BACKUP_DIR}/${DATETIME}.tar.gz" -C "${BACKUP_DIR}" "${DATETIME}.sql.gz"
+
+if [ $? -ne 0 ]; then
+    echo "${DATETIME} - 创建备份包失败！"
+    exit 1
+fi
+
+# 删除临时的备份文件
+rm -f "${BACKUP_DIR}/${DATETIME}.sql.gz"
+
+# 删除过期的备份文件
+echo "${DATETIME} - 删除过期备份文件..."
+find "${BACKUP_DIR}" -type f -name "*.tar.gz" -mtime +${RETENTION_DAYS} -exec rm -f {} \;
+
+if [ $? -ne 0 ]; then
+    echo "${DATETIME} - 删除过期备份文件失败！"
+    exit 1
+fi
+
+echo "${DATETIME} - 数据库备份完成！"
+
+```
+
+# py-Ubuntu
+
+## 1.介绍
+
+> > Ubuntu(友帮拓、优般图、乌班图)是一个以面应用为主的开源GNU/Linux操作系统支持x86、amd64(即x64)和p架构，由全球化的专业开Ubuntu 是基于 GNU/Liu发团队(Canonical Ltd)打造的。
+>
+> **专业的Python开发者一般会选择 Ubuntu 这款Linux系统作为生产平台**
+>
+> **温馨提示:**
+>
+> Ubuntu 和 Centos 都是基于 GNU/Linux 内核的，因此基本使用和Centos是几乎一样的它们的各种指令可以通用，同学们在学习和使用Ubuntu的过程中，会发现各种操作指令在面学习Centos都使用过。只是界面和预安装的软件有所差别。
+
+## 2.安装（自己搜吧）
+
+> ubuntu安装比centos还简单一点
+
+## 3.ubuntu汉化
+
+> 1.设置Ubuntu支持中文
+>
+> > 默认安装的ubuntu 中只有英文语言，因此是不能显示汉字的。要正确显示汉字，需要安装中文语言包。
+>
+> 2.安装中文支持步骤:
+>
+> - 1.单击左侧图标栏打开 Language support 菜单，点击打开Language Support(语言支持)选项卡。
+>
+> - 2.点击Install/Remove Languages，在弹出的选项卡中下拉找到Chinese(Simplified)，即中文简体，在后面的选项框中打勾。然后点击Apply Changes 提交，系统会自动联网下载中文语言包。(保证ubuntu 是联网的)。
+>
+> - 3.这时“汉语(中国)”在最后一位因为当前第一位是”English”，所以默认显示都是英文。我们如果希望默认显示用中文，则应该将“汉语(中国)”设置为第一位。设置方法是拖动，鼠标单击“汉语(中国)当底色变化(表示选中了后，按住鼠标左键不松手，向上拖动放置到第一位。
+>
+> - 4.设置后不会即刻生效，需要下次登录时才会生效
+
+## 4.ubuntu的root
+
+> ubuntu的用户是弱用户
+
+> 介绍
+>
+> >  安装ubuntu成功后，都是普通用户权限，并没有最高root权限，如果需要使用root权限的时候，通常都会在命令前面加上 sudo 。有的时候感觉很麻烦。
+>
+> 解决方法
+>
+> > **我们一般使用su命令来直接切换到root用户的，但是如果没有给root设置初始密码就会抛出 `su:Authentication failure` 这样的问题。所以，我们只要给root用户设置一个初始密码就好了。**
+>
+> - 给root用户设置密码并使用
+>
+>   - 1.输入 `sudo passwd root` /`su -`命令，设定root用户密码
+>
+>   - 2.设定root密码成功后，输入su 命令，并输入刚才设定的root密码，就可以切换成root了。提示符$代表一般用户，提示符#代表root用户。
+>
+>   - 3.以后就可以使用root用户了
+>
+>   - 4.输入 exit 命令，退出root并返回一般用户
+
+## 5.python
+
+> 1.说明
+>
+> > 安装好Ubuntu后，默认就已经安装好Python的开发环境
+>
+> 2.在Ubuntu下开发一个Python程序
+>
+> `vi hello.py `    ===>[编写hello.py] 
+>
+> `python3 hello.py`    ====>  [运行hello.py]
+
+## 6.apt原理
+
+### 1.介绍
+
+> apt是Advanced Packaging Tool的简称，是一款安装包管理工具。在Ubuntu下，我们可以使用apt命令进行软件包的安装、删除、清理等，类似于Windows中的软件管理工具。原理图如下：
+>
+> unbuntu 软件管理的原理示意图
+>
+> ![image-20240911160448119](Linux入门/image-20240911160448119.png)
+
+### 2.更新apt源，和实例
+
+#### 1.实例命令
+
+> `sudo apt-get update` **更新源**
+>
+> `sudo apt-get install package` **安装包**
+>
+> `sudo apt-get remove package` **删除包**
+>
+> `sudo apt-cache search package` 搜索软件包
+>
+> `sudo apt-cache show paIkage` **获取包的相关信息，如说明、大小、版本等**
+>
+> `sudo apt-get install package --reinstall`重新安装包
+>
+> `sudo apt-get -f install` 修复安装
+>
+> `sudo apt-get remove package --purge` 删除包，包括配置文件等
+>
+> `sudo apt-get build-dep package` 安装相关的编译环境
+>
+> `sudo apt-get upgrade` 更新已安装的包
+>
+> `sudo apt-get dist-upgrade` 升级系统
+>
+> `sudo apt-cache depends package` 了解使用该包依赖那些包
+>
+> `sudo apt-cache rdepends package` 查看该包被哪些包依赖
+>
+> `sudo apt-get source package` **下载该包的源代码**
+
+#### 2.修改源（这里演示的版本是20.04）
+
+> 1.先备份一份原文件
+>
+> - `sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup`
+>
+> 2.切换root用户，在`/etc/apt`目录下，并清空源文件
+>
+> - `su root`
+> - `cd /etc/apt`
+> - `echo '' > sources.list`
+>
+> 3.先找到`https://mirrors.tuna.tsinghua.edu.cn/`步骤如下：
+>
+> - ![image-20240911162216281](Linux入门/image-20240911162216281.png)
+> - ![image-20240911162547654](Linux入门/image-20240911162547654.png)
+>
+> - 将内容复制到对应的源文件后，更新源即可
+>
+> 4.更新源（刷新）
+>
+> - `sudo apt-get update`
+>
+> 5.案例说明:使用apt完成安装和卸载vim 软件，并査询 vim 软件的信息:(因为使用了镜像网站 ，速度很快)
+>
+> - `sudo apt-get remove vim`  #删除
+>
+> - `sudo apt-get install vim`  #安装
+>
+> - `sudo apt-cache show vim`  #获取vim的信息
+
+## 7.远程登录
+
+### 1.ssh
+
+> 1.ssh介绍
+>
+> > SSH为Secure Shell的缩写，由IETF 的网络工作小组(Network Working Group)所制定;SSH 为建立在应用层和传输层基础上的安全协议。
+>
+> > SSH是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议。常用于远程登录几乎所有UNIX/LInux 平台都可运行SSH。
+>
+> > 使用SSH服务，需要安装相应的服务器和客户端。客户端和服务器的关系:如果，A机器想被B机器远程控制，那么，A机器需要安装SSH服务器，B机器需要安装SSH客户端。
+>
+> 2.原理图
+>
+> > ![image-20240911163744354](Linux入门/image-20240911163744354.png)
+>
+> 3.注意：
+>
+> **和CentOS不一样，Ubuntu默认没有安装SSHD服务(使用`netstat` 指令查看22端口，若没安装netstat则执行 `apt installnet-tools`进行安装再执行`netstat`查看),发现没有22端口，因此，我们不能进行远程登录。**
+>
+> 4.安装SSH和启用
+>
+> - 1.`sudo apt-get install openssh-server`
+>   - 执行上面指令后，**在当前这台Linux上就安装了SSH服务端和客户端**
+>   - 若不执行下面命令，则现在只有ssh客户端
+>
+> - 2.`service sshd restart`
+>   - 执行上面的指令，就启动了 sshd 服务。会监听端口22
+
+### 2.集群
+
+1.从一台linux系统远程登陆另外一台linux系统
+
+>> 在创建服务器集群时，会使用到该技术
+>
+>1.基本语法:
+>
+>- ssh 用户名@IP
+>  - 例如:ssh hspedu@192.168.200.222
+>
+>> 使用ssh访问，如访问出现错误。可查看是否有该文件~/.ssh/known ssh 尝试删除该文件解决，一般不会有问题
+>
+>2.登出
+>
+>- 登出命令:`exit`或者`logout`
+
+# 日志
