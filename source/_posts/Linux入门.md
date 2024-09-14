@@ -1,9 +1,6 @@
 ---
-、title: Linux入门
-date: 2024-09-02 10:03:30
-tags:
-
-
+title: Linux文章
+date: 2024-09-12 11:20:19
 ---
 
 # Liunx
@@ -319,7 +316,7 @@ help指令
 百度帮助更直接
 如果英语不太好的，也可以直接百度靠谱
 
-## 15.文件目录类
+## 15.文件目录类-pwd-ls-ln.....
 
 > pwd：显示绝对路径
 
@@ -408,17 +405,22 @@ help指令
 
 > ln :软链接也称为符号链接，类似于windows里的快捷方式，主要存放了链接其他文件的路径
 >
-> 语法：ln -s 原文件或目录 软链接名    ：给原文件创建一个软链接  类似于win的快捷方式
+> 语法：`ln -s 原文件或目录 软链接名`    ：给原文件创建一个软链接  类似于win的快捷方式
 >
-> 应用案例  ln -s /root /home/myroot   
+> 应用案例  `ln -s /root /home/myroot   `
 >
-> rm /home/myroot   :删除软连接
+> `rm /home/myroot`   :删除软连接
 
-> history   ：查看历史使用命令
+> `history `  ：查看历史使用命令
 >
-> ​	history 10  :表示查看最近使用的10条命令
+> - `history 10`  :表示查看最近使用的10条命令
 >
-> !编号     ：这个编号是用history查看的那个命令前的编号   意思是把这个命令重新执行一遍，或者直接重新打一遍
+> - 通过下面方式重新执行
+>
+>   - `!编号`     ：这个编号是用history查看的那个命令前的编号   意思是把这个命令重新执行一遍，或者**直接重新打一遍**
+>
+>   - `!`字母也下，如我曾经使用过`tail`  	`!t`就会从history从下往上匹配`t`开头的，太久的不建议这样使用
+>   - 那如何找久远的命令呢，先执行`history` 再按 `ctrl+r` 搜寻你想搜寻的关键字即可，搜寻规则也是从下往上匹配
 
 ## 16.时间日期指令
 
@@ -428,9 +430,9 @@ help指令
 >
 > ​	-s  字符串时间    ：设置系统当前时间  例如：date -s "2024-09-04 14:02:55"
 
-> cal   查看当前月份的日历
+> `cal`   查看当前月份的日历
 >
-> cal 2024   :展示2024的1-12的日历
+> `cal 2024`   :展示2024的1-12的日历
 
 ## 17.查找指令-find-locate -which-grep  
 
@@ -470,6 +472,8 @@ help指令
 > ​		-n  显示行号
 >
 > ​		-i  忽略大小写
+>
+> ​		-v 反向匹配（就是包含某个过滤条件的不要查询）
 >
 > ​	管道符 |  表示将前一个命令的处理结果输出传递给后面的命令处理
 >
@@ -1020,7 +1024,7 @@ help指令
 >      - ![image-20240905170735027](Linux入门/image-20240905170735027-17255272563417.png)
 >    - 添加完成后，不重启，则执行`mount -a` 即可生效
 >
->  **注意：**命令行挂载是临时的，重启失效，采用配置文件的方式是永久的（原理是：开机会读取配置文件）
+>  **注意：命令行挂载是临时的，重启失效，采用配置文件的方式是永久的（原理是：开机会读取配置文件）**
 >
 > ------
 >
@@ -1132,8 +1136,7 @@ help指令
 >       HWADDR=00:0C:2x:6x:0x:xx #MAC地址
 >       TYPE=Ethernet   #网络光型(通常是Ethemct)
 >       UUID=926a57ba-92c6-4231-bacb-f27c5c6a9f44    #随机id
->       
->       
+>               
 >       #系统启动的时候网络接口是否有效(yes/no)-------改yes,
 >       ONBOOT=yes
 >       #IP的配置方法[none|static|bootp|dhcp] (引导时不使用协议|静态分配IP|BOOTP协议|DHCP协议)---改static
@@ -1176,14 +1179,14 @@ help指令
 > **思考:如何通过 主机名能够找到(比如ping)某个linux系统?**
 >
 > -  windows
->   - 在C:\Windows\System32\drivers\etc\hosts 文件指定即可
->     - 案例: 192.168.200.130 hspedu100
->       - 操作：修改hosts文件，添加192.168.200.130 hspedu100
+>    - 在C:\Windows\System32\drivers\etc\hosts 文件指定即可
+>      - 案例: 192.168.200.130 hspedu100
+>        - 操作：修改hosts文件，添加192.168.200.130 hspedu100
 >
-> - linux
->   - 在/etc/hosts 文件 指定 	
->     - 案例: 192.168.200.1 ThinkPad-PC
->       - 操作：`vim /etc/hosts`	添加192.168.200.1 ThinkPad-PC
+> -  linux
+>    - 在/etc/hosts 文件 指定 	
+>      - 案例: 192.168.200.1 ThinkPad-PC
+>        - 操作：`vim /etc/hosts`	添加192.168.200.1 ThinkPad-PC
 
 ### 主机名解析过程分析
 
@@ -1325,9 +1328,9 @@ help指令
 >应用实例:
 >
 >- 案例1:请你树状的形式显示进程的pid
->  - `pstree -p`
+>- `pstree -p`
 >- 案例2:请你树状的形式进程的用户
->  - `pstree -u`
+>- `pstree -u`
 
 ## 25.服务管理
 
@@ -1466,12 +1469,10 @@ systemctl管理指令
 > 2.firewall指令
 >
 > - 打开端口:`firewall-cmd --permanent --add-port=端囗号/协议`
->
 > - 关团端口:`firewall-cmd --permanent --remove-port=端囗号/协议`
->
 > - 重新载入,才能生效:`firewall-cmd --reload`
->
 > - 查询端口是否开放:`firewall-cmd --query-port=端口/协议`
+> - 查看已经开放的端囗号：`firewall-cmd --zone=public --list-ports` 
 >
 > 3.怎么知道端口的协议是什么协议呢  #下面命令第一列就是协议
 >
@@ -1487,7 +1488,6 @@ systemctl管理指令
 >   - `firewall-cmd --permanent --remove-port=111/tcp`
 >   - `firewall-cmd --reload`
 >
-> 
 
 ## 26.动态监控进程-top
 
@@ -1660,6 +1660,7 @@ systemctl管理指令
 >     - > removing these packages would break dependencies:foo is needed by bar-1.0-1
 >
 > - 2.如果我们就是要删除 foo这个rpm 包，可以增加参数 --nodeps,就可以强制删除，但是一般不推荐这样做，因为依赖于该软件包的程序可能无法运行
+>
 >   - 如: `rpm -e --nodeps foo`
 
 ### 5.安装rpm
@@ -1769,10 +1770,10 @@ systemctl管理指令
 >
 > - 需求说明:创建一个Shell脚本，输出hello world!
 >
->   - ```shell
->     #!/bin/bash
->     echo "hello,world~"
->     ```
+>   ```shell
+>   #!/bin/bash
+>   echo "hello,world~"
+>   ```
 >
 > 3.脚本的常用执行方式
 >
@@ -1811,18 +1812,18 @@ systemctl管理指令
 >
 >   - 案例3:声明静态的变量B=2，不能unset
 >
->     - ```shell
->       #案例一
->       A=100
->       echo A=$A
->       #案例二
->       unset A
->       echo A=$A
->       #案例三
->       #不能unset B
->       readonly B=2
->               
->       ```
+>     ```shell
+>     #案例一
+>     A=100
+>     echo A=$A
+>     #案例二
+>     unset A
+>     echo A=$A
+>     #案例三
+>     #不能unset B
+>     readonly B=2
+>     
+>     ```
 >
 >   - 案例4:可把变量提升为全局环境变量，可供其他shel程序使用[该案例后面讲]
 
@@ -1875,13 +1876,13 @@ systemctl管理指令
 >
 > - 多行注释：`:<<!`  `!` 必须单独一行
 >
->   - ```shell
->     :<<!
->     内容~
->     !
->     ```
+>   ```shell
+>   :<<!
+>   内容~
+>   !
+>   ```
 >
->     
+> 
 
 ## 4.位置参数变量
 
@@ -1934,7 +1935,7 @@ systemctl管理指令
 >3.应用实例
 >
 >- 在一个shell脚本中简单使用一下预定义变量
->  - ![image-20240910155833833](Linux入门/image-20240910155833833.png)
+>- ![image-20240910155833833](Linux入门/image-20240910155833833.png)
 >
 >
 
@@ -2112,11 +2113,11 @@ for循环
 > while循环
 > 基本语法
 >
-> - ```shell
->   while [ 条件判断式 ]do
->   程序
->   done
->   ```
+> ```shell
+> while [ 条件判断式 ]do
+> 程序
+> done
+> ```
 >
 > - 注意：`while`和`[`有空格，条件判断式和`[`也有空格
 >
@@ -2124,17 +2125,17 @@ for循环
 >
 > - 案例1 :从命令行输入一个数n，统计从 1+..+n 的值是多少?
 >
->   - ```shell
->     #!/bin/bash
->     SUM=0
->     i=0
->     while [ $i -le $1 ]
->     do
->     	SUM=$[$SUM+$I]
->     	i=$[$i+1]
->     done
->     echo "执行结束=$SUM"
->     ```
+>   ```shell
+>   #!/bin/bash
+>   SUM=0
+>   i=0
+>   while [ $i -le $1 ]
+>   do
+>   	SUM=$[$SUM+$I]
+>   	i=$[$i+1]
+>   done
+>   echo "执行结束=$SUM"
+>   ```
 
 ## 12.read获取输入
 
@@ -2204,7 +2205,7 @@ for循环
 
 ## 14.自定义函数
 
-> 自定义函数基本语法
+> 1.自定义函数基本语法
 >
 > ```shell
 > [ function ] funname[0]
@@ -2216,25 +2217,24 @@ for循环
 > #调用直接写函数名:funname [值]
 > ```
 >
->
-> 应用实例
+> 2.应用实例
 >
 > - 案例1:计算输入两个参数的和，getsum
 >
->   - ```shell
->     function getsum()
->     {
->     	SUM=$[$n1+$n2];
->     	echo "和是=$SUM"
->     }
->             
->     read -p ”请输入一个数 n1=“ n1
->     read -p ”请输入一个数 n2=“ n2
->     #调用
->     getSUM $n1 $n2
->     ```
+> ```shell
+> function getsum()
+> {
+> 	SUM=$[$n1+$n2];
+> 	echo "和是=$SUM"
+> }
+> 
+> read -p ”请输入一个数 n1=“ n1
+> read -p ”请输入一个数 n2=“ n2
+> #调用
+> getSUM $n1 $n2
+> ```
 >
->   - ![image-20240911102511054](Linux入门/image-20240911102511054.png)
+> ![image-20240911102511054](Linux入门/image-20240911102511054.png)
 
 ## 15.写一个定时备份数据库脚本
 
@@ -2256,42 +2256,42 @@ for循环
 >
 >   - 1.脚本如下
 >
->     - ```shell
->       #!/bin/bash
->       #备份目录
->       BACKUP=/data/backup/db
->       #当前时间
->       DATETIME=$(date +%Y-%m-%d_%H%M%S)
->       #数据库地址
->       HOST=localhost
->             #数据库用户名
->       DB_USER=root
->       #数据库密码
->       DB_PW=123456
->       #备份的数据库名
->       DATABASE=test
->           
->       #创建备份目录，如果不存在，就创建
->       [ ! -d "${BACKUP}/${DATETIME}" ] && mkdir -p "${BACKUP}/${DATETIME}"
->                 
->       #备份数据库(这里有风险，数据库密码泄露)
->       mysqldump -u${DB_USER} -p${DB_PW} --host=${HOST} -q -R --databases ${DATABASE} | gzip > ${BACKUP}/${DATETIME}/$DATETIME.sql.gz
->                 
->       #将文件处理成 tar.gz
->       cd ${BACKUP}
->             tar -zcvf $DATETIME.tar.gz ${DATETIME}
->       #删除对应的备份目录
->       rm -rf ${BACKUP}/${DATETIME}
->                 
->       #删除10天前的备份文件
->       find ${BACKUP} -mtime +10 -name "*.tar.gz" -exec rm -rf {} \;
->       echo "${DATETIME}===开始备份数据库===${DATABASE}====成功"
->       ```
+>     ```shell
+>     #!/bin/bash
+>     #备份目录
+>     BACKUP=/data/backup/db
+>     #当前时间
+>     DATETIME=$(date +%Y-%m-%d_%H%M%S)
+>     #数据库地址
+>     HOST=localhost
+>           #数据库用户名
+>     DB_USER=root
+>     #数据库密码
+>     DB_PW=123456
+>     #备份的数据库名
+>     DATABASE=test
 >     
->         - 2.设置循环执行命令
->   
+>     #创建备份目录，如果不存在，就创建
+>     [ ! -d "${BACKUP}/${DATETIME}" ] && mkdir -p "${BACKUP}/${DATETIME}"
+>     
+>     #备份数据库(这里有风险，数据库密码泄露)
+>     mysqldump -u${DB_USER} -p${DB_PW} --host=${HOST} -q -R --databases ${DATABASE} | gzip > ${BACKUP}/${DATETIME}/$DATETIME.sql.gz
+>     
+>     #将文件处理成 tar.gz
+>     cd ${BACKUP}
+>           tar -zcvf $DATETIME.tar.gz ${DATETIME}
+>     #删除对应的备份目录
+>     rm -rf ${BACKUP}/${DATETIME}
+>     
+>     #删除10天前的备份文件
+>     find ${BACKUP} -mtime +10 -name "*.tar.gz" -exec rm -rf {} \;
+>     echo "${DATETIME}===开始备份数据库===${DATABASE}====成功"
+>     ```
+>
+>       - 2.设置循环执行命令
+>
 >   - crontab -e 
->   
+>
 >   - `30 2 * * * /usr/sbin/mysql_db_backup.sh`
 
 脚本参考：
@@ -2581,7 +2581,7 @@ echo "${DATETIME} - 数据库备份完成！"
 >1.基本语法:
 >
 >- ssh 用户名@IP
->  - 例如:ssh hspedu@192.168.200.222
+>- 例如:ssh hspedu@192.168.200.222
 >
 >> 使用ssh访问，如访问出现错误。可查看是否有该文件~/.ssh/known ssh 尝试删除该文件解决，一般不会有问题
 >
@@ -2589,4 +2589,1245 @@ echo "${DATETIME} - 数据库备份完成！"
 >
 >- 登出命令:`exit`或者`logout`
 
+# centos8安装和介绍
+
+## 1.安装
+
+## 2.CentOS8.0 vs CentOS7.0的区别
+
+![image-20240912121818091](Linux入门/image-20240912121818091.png)
+
 # 日志
+
+## 1.介绍
+
+> 日志文件是重要的系统信息文件，其中记录了许多重要的系统事件包括用户的登录信息、系统的启动信息、系统的安全信息、邮件相关信息、各种服务相关信息等。
+>
+> 日志对于安全来说也很重要，它记录了系统每天发生的各和事情，通过日志来检查错误发生的原因或者受到攻击时攻击者留下的痕迹。
+>
+> 可以这样理解 日志是用来记录重大事件的工具
+
+2.`/var/log/ `目录就是系统日志文件的保存位置，看张图
+
+![image-20240912122039064](Linux入门/image-20240912122039064.png)
+
+3.系统常用的日志
+
+|       日志文件        | 说明                                                         |
+| :-------------------: | ------------------------------------------------------------ |
+| **/var/log/boot.log** | 系统启动日志                                                 |
+|   **/var/log/cron**   | 记录与系统定时任务相关的日志                                 |
+|    /var/log/cups/     | 记录打印信息的日志                                           |
+|    /var/log/dmesg     | 记录了系统在开机时内核自检的信总。也可以使用dmesg命令直接查看内核自检信息 |
+|     /var/log/btmp     | 记录错误登陆的日志。这个文件是二进制文件，不能直接用Vi查看，而要使用`lastb`命令查看。命令如下`[root@localhost log]# lastb` |
+| **/var/log/lastlog**  | 记录系统中所有用户最后一次的登录时间的日志。这个文件也是二进制文件，所以直接使用`lastlog`命令查看，这个命令会直接找到这个文件，并查看 |
+|  **/var/log/mailog**  | 记录邮件信息的日志                                           |
+| **/var/log/message**  | 记录系统重要消息的日志，这个日志文件中会记录Linux系统的绝大多数重要信息。**如果系统出现问题，首先要查的应该就是这个日志文件** |
+|  **/var/log/secure**  | 记录验证和授权方面的信息，只要涉及账户和密码的程序都会记录，比如**系统的登录、ssh的登录**、su切换用户sudo授权，甚至添加用户和修改用户密码都会记录在这个日志文件中，使用`cat /var/log/secure`查看 |
+|     /var/log/wtmp     | 永久记录所有用户的登陆、注销信息，同时记录系统的后动、重启、关机事件。是二进制文件.而要使用`last`的令查看 |
+|   **/var/tun/ulmp**   | 记录当前已经登录的用户的信息。这个文件会随着用户的登录和注销而不断变化，只记录当前登录用户的信息。这个文件不能用Vi查看而要使田`w`  `who` `users`等命令查看，这些命令直接取的这个文件的信息 |
+
+## 2.日志管理服务-rsyslogd
+
+> - 1.介绍
+>
+> > CentOs7.6日志服务是rsyslogd，CentOs6.x日志服务是syslogd。rsyslogd 功能更强大，rsyslogd 的使用、日志文件的格式，和 syslogd 服务兼容的。原理示意图（这个服务和日志的关系）
+> >
+> > ![image-20240912124749075](Linux入门/image-20240912124749075.png)
+>
+> 
+>
+> - 2.查询 Linux 中的 rsyslogd 服务是否启动
+>   - `ps aux | grep "rsyslog" | grep -v "grep` 或 `ps aux | grep "rsyslog"`
+>
+> - 3.查询 rsyslogd 服务的自启动状态
+>   - `systemctl list-unit-files | grep rsyslog`
+
+## 3.日志服务配置文件
+
+1.了解
+
+> 配置文件: `/etc/rsyslog.conf`
+>
+> > 编辑文件时的格式为: `*.* `  存放日志文件
+>
+> >  **其中第一个\*代表日志类型，第二个\*代表日志级别**
+>
+> - 1.第一个\*，代表日志类型，日志类型分为:
+>
+> | 类别                 | 说明                                |
+> | -------------------- | ----------------------------------- |
+> | auth                 | pam产生的日志                       |
+> | authpriv             | ssh、ftp等登录信息的验证信息        |
+> | corn                 | 时间任务相关                        |
+> | kern                 | 内核                                |
+> | lpr                  | 打印                                |
+> | mail                 | 邮件                                |
+> | mark(syslog)-rsyslog | 服务内部的信息，时间标识##新闻组    |
+> | news                 | 新闻组                              |
+> | user                 | 用户程序产生的相关信息              |
+> | uucp                 | unix to nuix copy主机之间相关的通信 |
+> | local 1-7            | 自定义的日志设备                    |
+>
+> - 2.第二个\*，表日志级别，日志级别分为:
+>
+> | 级别    | 说明                                                 |
+> | ------- | ---------------------------------------------------- |
+> | debug   | 有调试信息的，日志通信最多                           |
+> | info    | 一般信息日志，最常用                                 |
+> | notice  | 最具有重要性的普通条件的信息                         |
+> | warning | 警告级别                                             |
+> | err     | 错误级别阻止某个功能或者模块不能正常工作的信息       |
+> | crit    | 严重级别，阻止整个系统或者整个软件不能正常工作的信息 |
+> | alert   | 需要立刻修改的信息                                   |
+> | emerg   | 内核崩溃等重要信息                                   |
+> | none    | 什么都不记录                                         |
+>
+> **注意:从上到下，级别从低到高，记录信息越来越少**
+>
+> 看图分享：红色箭头表示邮件的所有记录都记录到日志文件中
+>
+> ![image-20240912130043684](Linux入门/image-20240912130043684.png)
+
+2.日志文件中的内容格式
+
+> 由日志服务 rsyslogd 记录的日志文件，日志文件的格式包含以下4列:
+>
+> - 1.事件产生的时间
+> - 2.产生事件的服务器的主机名
+> - 3.产生事件的服务名或程序名
+> - 4.事件的具体信息
+>
+> 日志如何查看实例
+>
+> - 查看一下 /var/log/secure 日志，这个日志中记录的是用户验证和授权方面的信息 来分析如何査
+> - ![image-20240912132954554](Linux入门/image-20240912132954554.png)
+
+## 4.自定义日志服务
+
+> 1.日志管理服务应用实例
+>
+> > 在`/etc/rsyslog.conf` 中添加一个日志文件`/var/log/hsp.log`，当有事件发送时(比如sshd服务相关事件)，该文件会接收到信息并保存:给小伙伴演示 ，警量 的情况，看看是否有日志保存
+>
+> 2.步骤：
+>
+> - 1.`vim /etc/rsyslog.conf`
+>   - ![image-20240912133423680](Linux入门/image-20240912133423680.png)
+> - 2.创建文件 `> /var/log/hsp.log`
+> - 3.重启 `reboot`
+
+## 5.日志轮替
+
+基本介绍
+
+> 1.基本介绍
+>
+> > 日志轮替就是把旧的日志文件移动并改名，同时建立新的空日志文件，当旧日志文件超出保存的范围之后就会进行删除
+>
+> 2.日志轮替文件命名
+>
+> - centos7使用logrotate进行日志轮替管理，要想改变日志轮替文件名字，通过 `/etc/logrotate.conf `配置文件中`dateext`参数:
+>
+>   - 如果配置文件中有`dateext`参数，那么日志会用日期来作为日志文件的后缀，例如`secure-20201010`。这样日志文件名不会重叠，也就不需要日志文件的改名，只需要指定保存日志个数，删除多余的日志文件即可。
+>
+>   - 如果配置文件中没有`dateext`参数，日志文件就需要进行改名了。**当第一次进行日志轮替时，当前的“secure日志会自动改secure.1，然后会新建“secure”日志，用来保存新的日志。**当第二次进行日志轮替时，`secure.1`会自动改名为`secure.2`，当前的`secure`日志会自动改名为`secure.1`，然后也会新建“secure”日志，用来保存新的日志，以此类推。
+>     - 解释： `/etc/logrotate.conf `配置文件是：**全局的日志轮替策略配置文件，当然可以单独给某个日志文件指定策略**
+
+logrotate配置文件
+
+> logrotate 配置文件
+>
+> /etc/logrotate.conf为logrotate的全局配置文件
+>
+> ```shell
+> # see "man logrotate" for details
+> # rotate log files weekly , 每周对日志文件进行一次轮替
+> weekly
+> 
+> # keep 4 weeks worth of backlogs ,共保存4份日志文件，当建立新的日志文件时，旧的将会被删除
+> rotate 4
+> 
+> # create new (empty) log files after rotating old ones,创建新的空的日志文件，在日志轮替后
+> create
+> 
+> # use date as a suffix of the rotated file,使用日期作为日志轮替文件的后缀
+> dateext
+> 
+> # uncomment this if you want your log files compressed ,日志文件是否压缩，如果取消注释，则日志会在转储的同时进行压缩
+> #compress
+> 
+> # RPM packages drop log rotation information into this directory
+> # 包含 /etc/logrotate.d/ 目录中所有的子配置文件。也就, 是说会把这个目录中所有子配置文件读取进来
+> include /etc/logrotate.d
+> 
+> #下面是单独设置，优先级更高
+> # no packages own wtmp and btmp -- we'll rotate them here
+> /var/log/wtmp {
+>     monthly #每月对日志文件进行一次轮替
+>     create 0664 root utmp #建立的新日志文件，权限是0664，所有者是root，所屏组是 utmp 组
+>     minsize 1M  #日志文件最小轮替大小是 1MB。也就是日志一定要超过 1MB3 才会轮替，否则就算时间达到一个月，也不进行日志转储
+>     rotate 1 #仅保留一个日志备份。也就是只有wtmp和wtmp.1日志保留而已
+> }
+> 
+> /var/log/btmp {
+>     missingok #如果日志不存在，则忽路该日志的警告信息
+>     monthly
+> 	create 0600 root utmp
+>     rotate 1
+> }
+> 
+> # system-specific logs may be also be configured here.
+> 
+> 
+> 
+> ```
+
+6.日志轮替的参数说明
+
+> logrotate配置文件参数说明
+> 参数说明
+>
+> | 参 数                   | 参数说明                                                     |
+> | ----------------------- | ------------------------------------------------------------ |
+> | daily                   | 日志的轮替周期是每天                                         |
+> | weekly                  | 日志的轮替周期是每周                                         |
+> | monthly                 | 日志的轮替周期是每月                                         |
+> | rotate 数字             | 保留的日志文件的个数。0指没有备份                            |
+> | compress                | 日志轮替时，旧的日志进行压缩                                 |
+> | create mode owner group | 建立新日志，同时指定新日志的权限与所有者和所属组             |
+> | mail address            | 当日志轮替时，输出内容通过邮件发送到指定的邮件地址。         |
+> | missingok               | 如果日志不存在，则忽略该日志的警告信息                       |
+> | notifempty              | 如果日志为空文件，则不进行日志轮替                           |
+> | minsize 大小            | 日志轮替的最小值。也就是日志一定要达到这个最小值才会轮替，否则就算时间达到也不轮替 |
+> | size 大小               | 日志只有大于指定大小才进行日志轮替，而不是按照时间轮替。     |
+> | dateext                 | 使用日期作为日志轮替文件的后缀。                             |
+> | sharedscripts           | 在此关键字之后的脚本只执行一次。                             |
+> | prerotate/endscript     | 在日志轮替之前执行脚本命令。                                 |
+> | postrotate/endscript    | 在日志轮替之后执行脚本命令。                                 |
+
+案例：
+
+> 把自己的日志加入日志轮替
+>
+> - 第一种方法是直接在/etc/logrotate.conf 配置文件中写入该日志的轮替策略
+>
+> - 第二种方法是在/etc/logrotate.d/目录中新建立该日志的轮替文件，在该轮替文件中写入正确的轮替策略，因为该目录中的文件都会被“include”到主配置文件中，所以也可以把日志加入轮替。
+>
+> > **推荐使用第二种方法，因为系统中需要轮替的日志非常多，如果全都直接写 入/etc/logrotate.conf 配置文件那么这个文件的可管理性就会非常差，不利于此文件的维护。**
+>
+> 在/etc/logrotate.d/ 配置轮替文件一览
+>
+> ![image-20240912141202444](Linux入门/image-20240912141202444.png)
+>
+> 案例操作流程
+>
+> 看一个案例,在`/etc/logrotate.conf `进行配置,或者直接在 `/etc/logrotate.d/`下创建文件` hsplog `编写如
+> 下内容，具体轮替的效果 可以参考 `/var/log `下的` boot.log `情况
+>
+> ```shell
+> /var/log/hsp.log {
+>     missingok #如果日志不存在，则忽路该日志的警告信息
+>     daily
+> 	copytruncate #copy替换
+>     rotate 7
+>     notifempty  #文件空的不轮替
+> }
+> ```
+>
+> 最终会如下显示模板
+>
+> ![image-20240912141524512](Linux入门/image-20240912141524512.png)
+
+## 6.日志轮替机制
+
+> 日志轮替机制原理
+>
+> > 日志轮替之所以可以在指定的时间备份日志，是依赖系统定时任务。在`/etc/cron.daily/`目录，就会发现这个目录中是有`logrotate `文件(可执行)，`logrotate` 通过这个文件依赖定时任务执行的。
+> >
+> > ![image-20240912141853558](Linux入门/image-20240912141853558.png)
+>
+> 整体讲解图
+>
+> ![image-20240912142231959](Linux入门/image-20240912142231959.png)
+
+## 7.查看内存日志
+
+> 特点：重启后内存日志清空
+
+> journalctl 可以查看内存日志,这里我们看看常用的指令
+>
+> - `journalctl`	##查看全部
+> - `journalctl -n 3 `   ##查看最新3条
+> - `journalctl --since 19:00 --until 19:10:10 `#查看起始时间到结束时间的日志可加日期
+> - `journalctl -p err` ##报错日志
+> - `journalctl -o verbose` ##日志详细内容
+> - `journalctl PID=1245 _COMM=sshd` ##查看包含这些参数的日志(在详细日志查看)或者`journalctl | grep sshd`
+>
+> **注意:` journalctl `查看的是内存日志，重启清空**
+>
+> 演示案例:
+>
+> - 使用`journalctl | grep sshd `来看看用户登录清空，**重启系统**，再次查询,看看日志有什么变化没有
+
+# 定制自己的Linux
+
+## 1.基本原理
+
+> 启动流程介绍:
+>
+> 制作Linux小系统之前，再了解-下Linux的启动流程:
+>
+> - 1.首先Linux要通过自检，检查硬件设备有没有故障
+>
+> - 2.如果有多块启动盘的话，需要在BIOS中选择启动磁盘
+>
+> - 3.启动MBR中的bootloader引导程序
+>
+> - 4.加载内核文件
+>
+> - 5.执行所有进程的父进程、老祖宗systemd
+>
+> - 6.欢迎界面
+>
+> 在Linux的启动流程中，加载内核文件时关键文件
+>
+> - 1)kernel文件:vmlinuz-3.10.0-957.el7.x86 64
+>
+> - 2 )initrd文件: initramfs-3.10.0-957.el7.x86 64.img
+
+## 2.制定min Linux思路分析
+
+> > 1.在现有的Linux系统(centos7.6)上加一块硬盘/dev/sdb，在硬盘上分两个分区，一个是/boot，一个是/，并将其格式化。需要明确的是，现在加的这个硬盘在现有的Linux系统中是/dev/sdb，但是，当我们把东西全部设置好时，要把这个硬盘拔除，放在新系统上，此时，就是/dev/sda
+>
+> > 2.在/dev/sdb硬盘上，将其打造成独立的Linux系统，里面的所有文件是需要拷贝进去的
+>
+> > 3.作为能独立运行的Linux系统，内核是一定不能少，要把内核文件和initramfs文件也一起拷到/dev/sdb上
+>
+> > 4.以上步骤完成，我们的自制Linux就完成,创建一个新的linux虚拟机，将其硬盘指向我们创建的硬盘，启动即可
+>
+> 原理图（总之就是sda的东西拷贝到sdb中 ，sdb则就是小型的linux）
+>
+> ![image-20240912144448180](Linux入门/image-20240912144448180.png)
+
+## 步骤：
+
+### 1.
+
+首先，我们在现有的linux添加一块大小为20g的硬盘
+
+![image-20240912144701955](Linux入门/image-20240912144701955.png)
+
+![image-20240912144801109](Linux入门/image-20240912144801109.png)
+
+### 2.
+
+添加完成后，点击确定，然后启动现有的linux(centos7.6)。通过`fdisk`来给我们的/dev/sdb进行分区
+
+```shell
+#先看看硬盘，发现sdb没有分区和格式化也没有挂载
+lsblk
+#格式化硬盘
+fdisk /dev/sdb
+n
+p
+回车
++500M
+n
+p
+回车
+回车
+w
+
+#先看看硬盘，发现sdb分区了
+lsblk
+```
+
+### 3.
+
+接下来我们对/dev/sdb的分区进行格式化
+
+```shell
+mkfs.ext4 /dev/sdb1
+mkfs.ext4 /dev/sdb2
+```
+
+### 4.
+
+创建目录，并挂载新的磁盘
+
+```shell
+mkdir -p /mnt/boot /mnt/sysroot
+mount /dev/sdb1 /mnt/boot
+mount /dev/sdb2 /mnt/sysroot
+
+```
+
+### 5.
+
+安装grub,内核文件拷贝至目标磁盘（centos7.6安装的是grub2）
+
+```shell
+grub2-install --root-directory=/mnt/dev/sdb
+#我们可以来看一下二进制确认我们是否安装成功
+hexdump -C -n 512 /dev/sdb
+cp -rf /boot/* /mnt/boot/
+```
+
+### 6.
+
+修改grub2/grub.cfg 文件，标红的部分 是需要使用的 指令来查看 (最麻烦的)
+
+> 这个文件是用来指定那个盘是启动盘，那个是根目录盘
+
+
+
+1.先查看分区的uuid，一会在grub.cfg要用
+
+![image-20240912150642488](Linux入门/image-20240912150642488.png)
+
+2.在 gmnub.c文件中 ,红色部分用 上面 sdb1 的 UUID 替换，蓝色部分用 sdb2的 UUID 来替换，紫色部分是添加的，表示selinux 给关掉，同时设定一下 init，告诉内核不要再去找这个程序了，不然开机的时候会出现错误的
+
+操作：进入gurb.cfg文件，按照上面修改
+
+```shell
+cd /mnt/boot
+cd grub2
+vim grub.cfg
+
+```
+
+> 1.修改uuid  
+
+![image-20240912151220960](Linux入门/image-20240912151220960.png)
+
+第二处
+
+![image-20240912151554988](Linux入门/image-20240912151554988.png)
+
+> 2.加一句话
+
+![image-20240912151459728](Linux入门/image-20240912151459728.png)
+
+第二处
+
+![image-20240912151635175](Linux入门/image-20240912151635175.png)
+
+### 7.
+
+创建目标主机根文件系统
+
+```shell
+mkdir -pv /mnt/sysroot/{etc/rc.d,usr,var,proc,sys,dev,lib,lib64,bin,sbin,boot,srv,mnt,media,home,root}
+```
+
+### 8.
+
+拷贝需要的bash(也可以拷贝你需要的指令)和库文件给新的系统使用
+
+```shell
+#一些依赖的库文件
+cp /lib64/*.* /mnt/sysroot/lib64
+#bash文件，不然系统都进不去  这里指令只拷贝了bash ，ls都没有
+cp /bin/bash /mnt/sysroot/bin/
+```
+
+### 9.
+
+现在我们就可以创建一个新的虚拟机，然后将默认分配的硬盘 移除掉，指向我们刚刚创建的磁盘即可.
+
+![image-20240912152513638](Linux入门/image-20240912152513638.png)
+
+### 10.
+
+这时，很多指令都不能使用，比如 ls,reboot 等，可以将需要的指令拷贝到对应的目录即可
+
+### 11.
+
+如果要拷贝指令，**重新进入到原来的 Linux系统拷贝相应的指令即可**，比如：将 `/bin/ls `拷贝到 `/mnt/sysroot/bin` ，将`/sbin/reboot `拷贝到`/mnt/sysroot/sbin`
+
+```shell
+mount /dev/sdb2 /mnt/sysroot/
+cp /bin/ls /mnt/sysroot/bin/
+cp /bin/systemctl /mnt/sysroot/bin/
+cp /sbin/reboot /mnt/sysroot/sbin/
+```
+
+### 12.
+
+再重新启动新的 1inux系统，就可以使用`ls`，`reboot`指令了
+
+```shell
+#使用方式是/bin/ls，因为没有环境
+/bin/ls /home
+```
+
+# 阅读Linux源码
+
+> 阅读linux0.01版的内核，还轻松
+
+源码目录展示
+
+![image-20240913090148835](Linux入门/image-20240913090148835-17261893102051.png)
+
+min函数中方法的调用
+
+![image-20240913091249337](Linux入门/image-20240913091249337.png)
+
+## 1.内核升级
+
+> 内核地址：https://www.kernel.org/ 查看
+
+实例：
+
+下载&解压最新版（**不是随便升级的，有兼容问题**）
+
+```shell
+#1.下载
+wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.8.16.tar.gz
+
+#2.解压
+tar -zxvf linux-5.8.16.tar.gz
+
+#3.查看当前的内核版本
+uname -a 
+#4.查看系统内核,显示可以升级的内核
+yum info kernel -q
+
+#5.升级内核
+yun update kernel 
+
+#6.查看已经安装的内核
+yum list kernel -q
+
+#7.现在查看内核信息还是原来那个`uname -a`
+#8.需要重新启动，然后会提示，你要进入那个内核
+#9.因为是兼容的 你之前安装的东西，用户信息 都还在，只是内核版本变高了
+```
+
+# linux备份和恢复
+
+## 1.介绍
+
+> > 实体机无法做快照，如果系统出现异常或者数据损坏，后果严重，要重做系统，所以我还会造成数据丢失。们可以使用备份和恢复技术
+>
+> Linux的备份和恢复很简单，有两种方式:
+>
+> - 1.把需要的文件(或者分区)用TAR打包就行，下次需要恢复的时候，再解压开覆盖即可
+>
+> - 2.使用dump和restore命令
+
+## 2.dump操作说明
+
+### 1.安装工具：
+
+> > 如果linux上没有 dump 和 restore 指令，需要先按照
+>
+> - `yum -y install dump`
+>
+> - `yum -yinstall restore`
+
+
+
+### 2.dump完成备份的语法
+
+> - 基本介绍
+>   - dump 支持分卷和增量备份	(所谓增量备份是指备份上次备份后 修改/增加过的文件,也称差异备份)。
+>
+> - dump语法说明
+>   - dump[-cu]  [-f <备份后文件名>] [-T <日期>] [目录或文件系统] 
+>     - 这个c是真正的数字 0 1 2 3 4 5 6 7 8 9  ，9之后又是0 重新增加。例如：`dump -0uj -f /opt/boot.bak.bz2 /boot`
+>   - dump [] -wW
+>   - 参数说明：
+>     - -c : 创建新的归档文件，并将由一个或多个文件参数所指定的内容写入归档文件的开头
+>       - -0 1 2 3 4 5 6 7 8 9 : 备份的层级。0为最完整备份，会备份所有文件。若指定0以上的层级，则备份至上一次备份以来修改或新增的文件,到9后，可以再次轮替.
+>     - -f<备份后文件名>:指定备份后文件名
+>     - -j:**调用 bzlib库压缩备份文件**，也就是将备份后的文件压缩成bz2格式，让文件更小
+>     - -T<日期>:指定开始备份的时间与日期
+>     - **-u**:备份完毕后，在`/etc/dumpdares`中记录备份的文件系统，层级，日期与时间等。
+>     - -t:指定文件名，若该文件已存在备份文件中，则列出名称
+>     - -W :显示需要备份的文件及其最后一次备份的层级，时间，日期。
+>     - -w与-W类似，但仅显示需要备份的文件。
+
+### 3.dump案例
+
+#### 1.dump备份分区
+
+> 1.dump应用案例1
+>
+> - 将/boot 目录(分区)所有内容备份到/opt/boot.bak0.bz2 文件中，备份层级为“0”
+>   - `dump -0uj -f /opt/boot.bak0.bz2 /boot`
+>
+> 2.dump应用案例2
+>
+> - 在/boot目录下增加一个文件，备份层级为“1”  (只备份上次使用层次“0”备份后发生过改变的数据)，**注意比较看这次生成的备份文件 boot1.bak 有多大**
+>   - `dump -1uj -f /opt/boot.bak1.bz2 /boot`
+>
+> > **提醒:** 通过dump命令在配合crontab 可以实现无人值守备份
+>
+> 3.案例：
+>
+> - dump -W
+>
+>   - 显示需要备份的文件及其最后一次备份的层级，时间，日期
+>
+>   ![image-20240913104606755](Linux入门/image-20240913104606755.png)
+>
+> - 查看备份时间文件
+>
+>   - `cat /etc/dumpdates`
+>
+>   ![image-20240913104634872](Linux入门/image-20240913104634872.png)
+
+#### 2.dump备份目录
+
+> -  dump 备份文件或者目录
+>   - 前面我们在**备份分区时，是可以支持增量备份的**，如果备份**文件或者目录，不再支持增量备份**，即只能使用0级别备份
+> - 案例 ，使用dump 备份/etc 整个目录
+>   - `dump -0j -f /opt/etc.bak.bz2 /etc`
+> - #下面这条语句会报错,提示 DUMP: Only level 0 dumps are allowed on a subdirectory ，参数`-u`也不支持
+>   - `dump -1j -f /opt/etc.bak.bz2 /etc/`
+> - **提醒：**如果是重要的备份文件 ，比如数据区，建议将文件上传到其它服务器保存，**不要将鸡蛋放在同一个篮子。**
+
+## 3.restore完成恢复说明
+
+### 1.介绍
+
+>基本介绍
+>
+>> restore 命令用来恢复已备份的文件，可以从dump 生成的备份文件中恢复原文件
+
+### 2.restore基本语法
+
+>restore基本语法
+>
+>- restore [模式选项] [选项]
+>
+>> **说明：下面四个模式，不能混用，在一次命令中，只能指定一种**
+>
+>- 模式
+>
+>  - -C : 使用对比模式，将备份的文件与已存在的文件相互对比。
+>
+>  - -i : 使用交互模式，在进行还原操作时，restors指令将依序询问用户
+>
+>  - -r:  进行还原模式（最多）
+>
+>  - -t : 查看模式，看备份文件有哪些文件
+>
+>- 选项
+>  - -f <备份设备>:从指定的文件中读取备份数据，进行还原操作
+
+### 3.案例
+
+#### 案例一（比较）
+
+> > restore 命令比较模式，就是比较备份文件和原文件的区别
+>
+> - `mv /boot/hello.java /boot/hello100.java`  //给原目录中的文件改名，再比较
+>
+> - `restore -C -f boot.bak1.bz2`     //注意和 最新的文件比较
+>
+> ![image-20240913110519363](Linux入门/image-20240913110519363.png)
+
+
+
+#### 案例二（查看）
+
+> > restore命令查看模式，看备份文件有哪些数据/文件
+>
+> 测试
+>
+> - `restore -t -f boot.bak0.hz2`
+
+
+
+#### 案例3 (还原文件)
+
+> > restore 命令还原模式，**注意细节：**如果你有增量备份，需要把增量备份文件也进行恢复，有几个增量备份文件就要恢复几个，**按顺序来恢复**即可
+>
+> 测试
+>
+> - `mkdir /opt/boottmp`
+>
+> - `cd /opt/boottmp`
+>
+> - `restore -r -f /opt/boot.bak0.bz2` //恢复到第1次完全备份状态
+>
+> - `restore -r -f /opt/boot.bak1.bz2` //恢复到第2次增量备份状态
+>
+> ![image-20240913111056752](Linux入门/image-20240913111056752.png)
+
+#### 案例4（恢复目录）
+
+> restore 命令恢复备份的文件，或者整个目录的文件
+>
+> 基本语法:
+>
+> `restore -r -f 备份好的文件`
+>
+> 测试
+>
+> ```  shell
+> mkdir -p /opt/etctmp
+> 
+> cd /opt/etctmp/
+> 
+> restore -r -f/opt/etc.bak0.bz2
+> ```
+>
+> 
+
+# webmin
+
+## 1.基本介绍
+
+> > Webmin是功能强大的基于Web的Unix/linux系统管理工具。管理员通过浏览器访问Webmin的各种管理功能并完成相应的管理操作。除了各版本的linux以外还可用于:AIX、HPUX、Solaris、Unixware、Irix和FreeBSD等系统
+
+## 2.安装
+
+> 安装webmin&配置
+>
+> 1.下载地址 :http://download.webmin.com/download/yum/，用下载工具下载即可
+>
+> ![image-20240913140037374](Linux入门/image-20240913140037374.png)
+>
+> > 也可以使用 wget http://downlobmi.com/download/yum/webmin-1.700..noarch.rom
+>
+> 2.安装:
+>
+> -   `rpm -ivh webmin-1.700-1.noarch.rpm`
+>
+> 3.重置密码
+>
+> -  `/usr/libexec/webmin/changepass.pl /etc/webmin root test`
+>
+> > `root`是webmin的用户名，不是OS的，这里就是把 webmin 的root 用户密码改成了 `test`
+>
+> 4.修改webmin服务的端口号(默认是10000 出于安全目的)
+>
+> - `vim/etc/webmin/miniserv.conf` #修改端口
+>   - 将`port=10000`修改为其他端口号，如port=6666
+>   - 将`listen=10000`修改为6666
+>
+> 5.重启webmin
+>
+> - `/etc/webmin/restart`  #重启
+>
+> - `/etc/webmin/start`  #启动
+>
+> - `/etc/webmin/stop` #停止
+>
+> 6.防火墙放开6666端口
+>
+> - `firewall-cmd --zone=public --add-port=6666/tcp --permanent` # 配置防火墙开放6666端口
+>
+> - `firewall-cmd --reload`  # 更新防火墙配置
+>
+> - `firewall-cmd --zone=public --list-ports` #查看已经开放的端囗号
+>
+> 7.登录webmin
+>
+> - http://ip:6666 可以访问了
+>
+>   - 用root账号和重置的新密码test
+>
+>   ![image-20240913142437221](Linux入门/image-20240913142437221.png)
+
+## 3.功能展示
+
+### 1.简单展示
+
+> 比如修改 语言设置，IP访问控制，查看进程,修改密码，任务调度，mysql 等
+
+1.语言设置：
+
+![image-20240913143924263](Linux入门/image-20240913143924263.png)
+
+2.修改密码
+
+![image-20240913143935880](Linux入门/image-20240913143935880.png)
+
+3.任务调度
+
+![image-20240913143906895](Linux入门/image-20240913143906895.png)
+
+4.任务管理器
+
+![image-20240913143849727](Linux入门/image-20240913143849727.png)
+
+5.mysql服务管理
+
+![image-20240913144029502](Linux入门/image-20240913144029502.png)
+
+6.shell控制台
+
+![image-20240913144202314](Linux入门/image-20240913144202314.png)
+
+7.ip访问
+
+![image-20240913144234567](Linux入门/image-20240913144234567.png)
+
+# 宝塔bt
+
+## 1.基本介绍
+
+> bt宝塔Linux面板是提升运维效率的服务器管理软件，支持一键LAMP/LNMP/集群/监控/网站/FTP/数据库/JAVA等多项服务器管理功能。
+
+
+
+## 2.安装和使用
+
+> 安装:
+>
+> - ` yum install -y wget` 
+>
+> - `wget -0 install.sh http://download.bt.cn/install/install 6.0.sh `
+>
+> - ` sh install.sh`
+>
+> 安装成功后控制台会显示登录地址，账户密码，复制浏览器打开登录
+>
+> ![image-20240913152419655](Linux入门/image-20240913152419655.png)
+
+## 3.实例
+
+> 使用介绍，比如可以登录终端,配置，快捷安装运行环境和系统工具,添加计划任务脚本
+>
+> http://ip:8888/d3076f56/
+
+## 4.忘记密码
+
+> 如果bt的用户名，密码忘记了，使用`bt default`可以查看
+
+![image-20240913154646107](Linux入门/image-20240913154646107.png)
+
+# linux面试题
+
+1.问题：分析日志t.log(访问量)，将各个ip地址截取，并统计出现次数,并按从大到小排序(腾讯)
+
+```text
+http://192.168.200.10/index1.html
+http://192.168.200.10/index2.html
+http://192.168.200.20/index1.html
+http://192.168.200.30/index1.html
+http://192.168.200.40/index1.html
+http://192.168.200.30/order.html
+http://192.168.200.10/order.html
+```
+
+答案：
+
+> `cat t.txt | cut -d '/' -f 3 | sort | uniq -c | sort -nr` 
+>
+> 解释：
+>
+> - cut 类似于Java中的切割字符串
+> - sort 排序
+>   - -nr  反序
+> - uniq 统计相邻的重复情况  所以先排序再统计
+
+![image-20240913155749647](Linux入门/image-20240913155749647.png)
+
+
+
+2.问题：统计连接到服务器的各个ip情况，并按连接数从大到小排序(腾讯)
+
+答案：
+
+> - `netstat -an |grep ESTABLISHED | awk -F " " '{print $5}' | awk -F ":" '{print $1}' | sort | uniq -c | sort -nr`
+>
+> 或者
+>
+> - `netstat -an |grep ESTABLISHED | awk -F " " '{print $5}' | cut -d ":" -f 1 | sort | uniq -c | sort -nr`
+>
+> 解释：
+>
+> - `awk -F " " '{print $1}'  ` 分割字符串，可以分割空格，`cut`简单的可以分割，空格不能分割
+
+3.问题：如忘记了mysql5.7数据库的ROOT用户的密码，如何找回?(滴滴)
+
+- `vim /etc/my.cnf`  
+- 添加一行`skip-grant-tables`(跳过权限)
+- 重启mysqld服务`service mysqld restart`
+- `mysql -u root -p` 空密码进入
+
+```sql
+show databases;
+user mysql;
+show tables;
+desc user;
+update user set authentication_string=password("123456") where user='root';
+flush privileges;
+exit
+```
+
+- `vim /etc/my.cnf`  
+- 注释`skip-grant-tables`(跳过权限)
+
+
+
+4.问题：写出指令:统计ip访问情况，要求分析nginx访问日志(access.log)，找出访问页面数量在前十位的ip(美团)
+
+```text
+192J168.130.21 aaa.html
+192.168.130.20 aaa.html
+192.168.130.20 aaa.html
+192.168.130.20 aaa.htm]
+192.168.130.23 aaa.html
+192.168.130.20 aaa.html
+192.168.130.25 aaa.html
+192.168.130.20 aaa.html
+192.168.130.20 aaa.html
+192.168.130.25 aaa.html
+192.168.130.20 aaa.html
+```
+
+答案：
+
+- `cat access.log | awk -F " " '{print $1}' | sort | uniq -c | sort -nr | head -2 `
+  - `head -2`  取前两条
+
+5.问题：使用tcpdump监听本机,将来自ip 192.168.200.1，tcp端口为22的数据，保存输出到tcpdump.log，用做将来数据分析(美团)
+
+答案：
+
+- `tcpdump`  #验证装没装
+- `tcpdump -i ens33 host 192.168.200.1 and port 22 >> /opt/interview/tcpdump.log`
+
+![image-20240914090501116](Linux入门/image-20240914090501116.png)
+
+
+
+6.常用的Nginx模块，用来做什么(头条)
+
+答案：
+
+```text
+rewrite模块，实现重写功能
+access模块:来源控制
+ssI模块:安全加密
+ngx_http_gzip_module:网络传输压缩模块
+ngx_http_proxy_module 模块实现代理
+ngx_http_upstream_module
+模块实现定义后端服务器列表
+ngx_cache_purge实现缓存清除功能
+...还有很多
+```
+
+7.如果你是系统管理员，在进行Linux系统权限划分时,应考虑哪些因素?(腾讯)
+
+第一：首先阐述Linux权限的主要对象
+
+![image-20240914091004808](Linux入门/image-20240914091004808.png)
+
+![image-20240914090951770](Linux入门/image-20240914090951770.png)
+
+第二：根据自己实际经验谈考虑因素
+
+> - 1.注意权限分离，比如: 工作中，Linux系统权限和数据库权限不要在同一个部门
+>
+> - 2.权限最小原则(即:在满足使用的情况下最少优先)
+>
+> - 3.减少使用`root用户`，尽量用`普通用户+sudo`提权进行日常操作。
+>
+> - 4.重要的系统文件，比如`/etc/passwd,/etc/shadow etc/fstab，/etc/sudoers` 等,日常建议使用`chattr` (change attribute的缩写)锁定，需要操作时再打开。【演示 比如: 锁定/etc/password 让任何用户都不能随意`useradd`，除非解除锁定】
+>   - ​	`chattr +i /etc/passwd ` #锁定这个文件后 所有用户都不能`useradd myuser`
+>   - 防止黑客执行`chattr`命令，将`chattr`命令藏起来：
+>     - `which chattr`  #找到这个命令的位置
+>     - `mv /usr/bin/chattr /opt`  #将这个命令转移，这样就不能直接使用这个命令了
+>     - `mv /opt/chattr /opt/h`   #怕黑客使用`find / -name chattr`找到 则修改这个命令的名字
+>   - 解锁的过程是防黑客的逆操作
+>     - `mv /opt/h /opt/chattr`
+>     - `mv /opt/chattr /usr/bin/`
+>     - `chattr -i /etc/passwd`  #命令还原后解锁
+>
+> - 5.使用`SUID, SGID, Sticky` 设置特殊权限。
+>
+> - 6.可以利用工具，比如`chkrootkit` 或者`rootkit hunter `检测rootkit脚本(rootkit是入侵者使用工具,在不察觉的建立了入侵系统途径)[演示使用 `wget ftp://ftp.pangeia.com.br/pub/seg/pac/chkrootkit.tar.gz`]
+>   - 下载后，执行`./chrootkit` 扫描  （解压后可以`gcc`进行编译（可选））
+>
+> - 7.利用工具`Tripwire` 检测文件系统完整性
+
+8.权限思考
+
+> 权限操作思考题
+>
+> 1.用户tom 对目录` /home/test `有执行和读写权限，`/home/test/hello.java` 是只读文件，问tom对`hello.java`文件能读吗？能修改吗？能删除吗？
+>
+> - 能读，不能修改，能删除
+>
+> 2.用户tom 对目录 /home/test 只有读写权限，/home/test/hello.java 是只读文件,问tom对 hello.java文件能读吗?能修改吗?能删除吗?
+>
+> 不能，不能，不能
+>
+> 3.用户tom 对目录 /home/test 只有执行权限,/home/test/hello.java 是只读文件,问tom对 hello.java文件能读吗?能修改吗 ?能删除吗?
+>
+> 能，不能，不能
+>
+> 4.用户tom 对目录 /home/test 只有执行和写权限，/home/test/hello.java 是只读文件，问tom对hello.java文件能读吗?能修改吗?能删除吗?
+>
+> 能，不能，能
+
+9.说明Centos7启动流程，并说明和CentOs6相同和不同的地方(腾讯)
+
+![image-20240914134312443](Linux入门/image-20240914134312443.png)
+
+![image-20240914134328917](Linux入门/image-20240914134328917.png)
+
+流程图
+
+![image-20240914134452700](Linux入门/image-20240914134452700.png)
+
+![image-20240914134526830](Linux入门/image-20240914134526830.png)
+
+结合两图讲解：
+
+> 第一步、硬件启动阶段
+>
+> - 这一步和 Centos6 差不多，详细请看图
+>
+> 第二步、GRUB2引导阶段
+>
+> - 从这一步开始,CentOs6和 Centos7 的启动流程区别开始展现出来了。Cent0s7的主引导程序使用的是 grub2。
+>
+> - 这一步的流程:显示加载两个镜像，再加载MOD 模块文件，把 grub2 程序加载执行，接着解析配置文件/boot/grub2/grub.cg，根据配置文件加载内核镜像到内存，之后构建虚拟根文件系统，最后转到内核。
+>
+> - 在这里 grub.cfg 配置文件已经比较复杂了，但并不用担心，到了 Cent0s7 中一般是使用命令进行配置，而不直接去修改配置文件了。不过我们可以看到grub.cfg配置文件开头注释部分说明了由/etc/grub.d/目录下文件和/etc/default/grub 文件组成。
+>
+> - 一般修改好配置后都需要使用命令grub2-mkconfig:o/boot/grub2/grub.cfg，将配置文件重新生成。
+>
+> 第三步、内核引导阶段
+>
+> - 这一步与 CentOs6 也差不多，加载驱动，切换到真正的根文件系统，唯一不同的是执行的初始化程序变成了/usr/lib/systemd/systemd
+>
+> 第四步、systemed初始化阶段(又叫系统初始化阶段)
+>
+> - Cent0s7 中我们的初始化进程变为了systemd,执行默认target 配文件`/etc/systemd/system/default.target`(这是一个软链接，与默认运行级别有关)。然后执行`sysinit.target `来初始化系统和 `basic.target` 来准备操作系统。接着启动 `multi-user.target`下的本机与服务器服务，并检査`/etc/rc.d/rc.local`文件是否有**用户自定义脚本**需要启动。最后执行` multi-user `下的 `getty.target `及登录服务，检查 `default.target `是否有其他的服务需要启动。
+>
+> - 注意:`/etc/systemd/system/defaulttarget`指向了`/lib/systemd/system/`目录下的`graphical.target` 或`multiuser.target`。而`graphical.target `依赖`multiuser.target`, `multiuser.target` 依赖 `basic.target`， `basic.target` 依赖`sysinit.target`，所以倒过来执行。
+>
+> - System 概述(了解):`systemd` 即为`system daemon`，是Linux 下的一种`init `软件，开发目标是提供更优秀的框架以表示系统服务间的以来关系，并依此实现系统初始化时服务的并行启动，同时达到降低`shell`系统开销的效果，最终代替现在常用的`System V`与 `BSD `风格的`init` 程序。
+>
+> - 与多数发行版使用的 `System V`风格的`init`相比，`systemd`采用了以下的新技术:A.采用 `Socket`激活式与总线激活式服务，以提高相互依赖的各服务的并行运行性能；B.用`Cgroup`代替`PID`来追踪进程，即使是两次 `fork`之后生成的守护进程也不会脱离 `systemd` 的控制。
+>
+> - unit 对象:`unit `表示不同类型的`systemd` 对象，通过配置文件进行标识和配置;文件中主要包含了系统服务、监听 socket、保存的系统快照以及其他与 init 相关的信息。(也就是CentOs6中的服务器启动脚本)
+>
+>   - (1).`/etc/systemd/system/default.target`  这是一个软链接，和默认运行级别相关
+>
+>     - 我们可以到这个目录下看一下 `cd /lib/systemd/system/ && ls *.target`  
+>
+>     - ![image-20240914135904070](Linux入门/image-20240914135904070.png)
+>
+>   - 这里可以看到runlevel开头的target文件，对应着Centos6 的启动级别，不过一样是软链接，指向了同目录下的其他文件，也算一种向下兼容吧
+>
+>     - `ll runlevel*.target`
+>
+>       ![image-20240914140029729](Linux入门/image-20240914140029729.png)
+>
+>     - 可以看到我的 default.target 与 runlevel5.target指向的是同一个文件，可以看出我的默认运行级别是 5。
+>
+>   - (2).`/usr/lib/systemd/system/`
+>     - 这个目录存储每个服务的脚本，类似CentOs6 的`/etc/init.d/`
+>   - (3).`/run/systemd/system/`
+>     - 系统执行过程中产生的脚本。
+>   - (4).`/etc/systemd/system/`
+>     - 类似于 CentOs6 的/etc/rc.d/rc#.d/sxx类文件的功能，管理员建立的执行脚本，大部分是软链接
+
+10.问题:列举 Linux高级命令，至少6个(百度)
+
+答案：
+
+> - 
+>   netstat //网络状态监控
+>
+> -  top //系统运行状态
+>
+> -  lsblk //查着硬盘分区
+>
+> -  find
+>
+> -  ps -aux //查看运行进程
+>
+> -  chkconfig //查看服务启动状态
+>
+> -  systemctl //管理系统服务器
+
+11.问题:Linux查看内存、io 读写、磁盘存储、端口占用、进程查看命令是什么?(瓜子)
+
+答案：
+
+> 1.`top` 内存
+>
+> ![image-20240914141325361](Linux入门/image-20240914141325361.png)
+>
+> 
+>
+> 2.`yum install iotop` 安装io查询
+>
+> ` iotop`
+>
+> ![image-20240914141644228](Linux入门/image-20240914141644228.png)
+>
+> 3.df -lh  
+>
+> ![image-20240914141717646](Linux入门/image-20240914141717646.png)
+>
+> 4.`netstat -tunlp`  只查询端口占用情况
+>
+> ![image-20240914141758657](Linux入门/image-20240914141758657.png)
+>
+> 5.`ps -aux | grep sshd` 进程查看情况
+>
+> ![image-20240914141936826](Linux入门/image-20240914141936826.png)
+
+12.使用Linux命令计算t2.txt 第二列的和并输出(美团)
+
+```text
+张三 40
+李四 50
+王五 60
+```
+
+答案：
+
+`cat t2.txt | awk -F " " '{sum+=$2} END {print sum}' `
+
+13.Shell脚本里如何检查一个文件是否存在?并给出提示(百度)
+
+答案：
+
+```shell
+if [ -f 文件名 ]
+then 
+	echo "存在"
+else echo “不存在”
+fi
+```
+
+
+
+14.用shell写一个脚本，对文本t3.txt 中无序的一列数字排序,并将总和输出(百度)
+
+```text
+9
+8
+7
+6
+5
+4
+3
+2
+10
+```
+
+答案：`sort -n t3.txt | awk '{sum+=$0; print $0} END {print "和="sum}'`
+
+15.请用指令写出查找当前文件夹(/home)下所有的文本文件内容中包含有字符`cat`的文件名称(金山)
+
+答案：
+
+`grep -r "cat" /home | cut -d ":" -f 1 `
+
+16.请写出统计/home目录下所有文件个数和所有文件总行数的指令(在金山面试题扩展)
+
+答案：
+
+`find /home/test -name "*.*" | wc -l`    #统计/home目录下所有文件个数
+
+`find /home/test -name "*.*" | xargs wc -l`  # 统计/home目录下所有文件总行数的指令
+
+17.列出你了解的web服务器负载架构(滴滴)
+
+答案：
+
+> Nginx
+>
+> Haproxy
+>
+> Keepalived
+>
+> LVS
+
+18.每天晚上 10 点30分，打包站点目录/var/spool/mail 备份到/home 目录下(每次备份按时间生成不同的备份包，比如按照 年月日时分秒)(滴滴)
+
+答案：
+
+> - 在/root中写脚本
+>
+> ```shell
+> #!/bin/bash
+> cd /var/spool/ && /bin/tar zcf /home/mail-`date +%Y-%m-%d_%H%M%S`.tar.gz mail/
+> ```
+>
+> ![image-20240914152057752](Linux入门/image-20240914152057752.png)
+>
+> - 写定时器
+>
+> ```shell
+> crontab -e
+> 
+> #mail.sh没有执行权限这样写（30 20 * * * /bin/sh /root/mail.sh），有执行权限则如下
+> 30 20 * * * /root/mail.sh
+> 
+> crontab -i
+> ```
+>
+> 
+
+19.如何优化Linux系统，说出你的方法(瓜子)
+
+> 1.架构层次
+>
+> ![image-20240914153120348](Linux入门/image-20240914153120348.png)
+>
+> 2.对linux本身的优化
+>
+> > (1)不用root,使用sudo提示权限
+> >
+> > (2)定时的自动更新服务时间,使用`ntpdate ntp1.aliyun.com`，让`crond `定时更新
+> >
+> > - ntpdate已经不建议使用，新系统使用ntpsec-ntpdate。
+> >
+> > (3)配置yum源，指向国内镜像(清华，163)
+> >
+> > (4)配置合理的防火墙策略,打开必要的端口，关闭不必要的端口
+> >
+> > (5)打开最大文件数(专业术语：调整文件的描述的数量) 在` vim /etc/profile ` 文件中添加` ulimit -SHn 65535`
+> >
+> > (6)配置合理的监控策略
+> >
+> > (7)配置合理的系统重要文件的备份策略
+> >
+> > (8)对安装的软件进行优化，比如`nginx`,`apache`
+> >
+> > (9)内核参数进行优化`/etc/sysctl.conf`
+> >
+> > (10)锁定一些重要的系统文件 `chattr `  ，例如锁定这些文件 `/etc/passwd` `/ect/shadow ` `/etc/inittab`
+> >
+> > (11)禁用不必要的服务 `setup`或 `ntsysv`
+
+# 补充命令
+
+1.scp命令
+
+> > 跨服务复制:  `scp`=`ssh cp`
+>
+> 语法：
+>
+> - scp [-r] 参数1 参数2
+>   - `-r` 选项用于复制文件夹使用，如果复制文件来，必须使用-r
+>   - 参数1:本机路径 或 远程目标路径
+>   - 参数2:远程目标路径 或 本机路径
+> - 案例：
+>   - 如:`scp -r /export/server/jdk root@node2:/export/server/`将本机上的jdk文件来，以root的身份复制到node2的/export/server/内同SSH登陆一样，账户名可以省略(使用本机当前的同名账户登陆)
+>   - 如:`scp -r node2:/export/server/idk /export/server/`将远程node2的jdk文件夹，复制到本机的/export/server/内
+>   - #scp命令的高级用法
+>     - `cd /export/server`
+>     - scp -r jdk node2:\`pmd\`  #将本机当前路径的jdk文件夹，复制到node2服务器的同名路径下
+>     - /scp -r jdk node2:$PWD  #将本机当前路径的jdk文件夹，复制到node2服务器的同名路径下
+>       
+
+2.env 命令
+
+> `env` 查看所有的环境变量，配合`$` 如：`$pwd`
+
