@@ -545,8 +545,6 @@ help指令
 >
 >**举一反三就有`tar -jcvf`，`tar -jxvf`，`tar -Zcvf`和`tar -Zxvf`等等**
 
-------
-
 ## 19.linux组（难点）
 
 > 一个文件/目录有 所有者 所在组 其他组 ；
@@ -734,7 +732,7 @@ help指令
 > jack，jerry 	：  在警察组
 > xh，xq    ：在土匪组
 >
-> ------
+>
 >
 > 1.创建组
 >
@@ -1026,7 +1024,7 @@ help指令
 >
 >  **注意：命令行挂载是临时的，重启失效，采用配置文件的方式是永久的（原理是：开机会读取配置文件）**
 >
-> ------
+>
 >
 > 6. 多说一点，卸载分区
 >    - 语法：
@@ -1131,23 +1129,23 @@ help指令
 >
 >     - ifcfg-ens33 文件说明（下面改的，要改，没有则添加，其余不懂，可能每个电脑文件不一样）
 >
->     - ```shell
->       DEVICE=ets33 	#接口名(设备,网卡)
->       HWADDR=00:0C:2x:6x:0x:xx #MAC地址
->       TYPE=Ethernet   #网络光型(通常是Ethemct)
->       UUID=926a57ba-92c6-4231-bacb-f27c5c6a9f44    #随机id
->               
->       #系统启动的时候网络接口是否有效(yes/no)-------改yes,
->       ONBOOT=yes
->       #IP的配置方法[none|static|bootp|dhcp] (引导时不使用协议|静态分配IP|BOOTP协议|DHCP协议)---改static
->       BOOTPROTO=static
->       #IP地址----改（没有，写一个ip）
->       IPADDR=192.168.200.130
->       #网关----改（没有，写一个ip）
->       GATEWAY=192.168.200.2
->       #域名解析器----改（没有，写一个ip）
->       DNS1=192.168.200.2
->       ```
+>     ```shell
+>     DEVICE=ets33 	#接口名(设备,网卡)
+>     HWADDR=00:0C:2x:6x:0x:xx #MAC地址
+>     TYPE=Ethernet   #网络光型(通常是Ethemct)
+>     UUID=926a57ba-92c6-4231-bacb-f27c5c6a9f44    #随机id
+>     
+>     #系统启动的时候网络接口是否有效(yes/no)-------改yes,
+>     ONBOOT=yes
+>     #IP的配置方法[none|static|bootp|dhcp] (引导时不使用协议|静态分配IP|BOOTP协议|DHCP协议)---改static
+>     BOOTPROTO=static
+>     #IP地址----改（没有，写一个ip）
+>     IPADDR=192.168.200.130
+>     #网关----改（没有，写一个ip）
+>     GATEWAY=192.168.200.2
+>     #域名解析器----改（没有，写一个ip）
+>     DNS1=192.168.200.2
+>     ```
 >
 >   - 3.再从vm中打开虚拟网络编辑器
 >
