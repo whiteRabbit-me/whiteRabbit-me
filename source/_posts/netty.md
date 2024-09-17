@@ -538,7 +538,4 @@ try (RandomAccessFile file = new RandomAccessFile("helloword/3parts.txt", "rw"))
 +--------+-------------------------------------------------+----------------+
 ```
 
-
-
 #### 2.5 Gathering Writes
-
