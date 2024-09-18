@@ -14,7 +14,7 @@ tags:
 
 > channel 有一点类似于 stream，它就是读写数据的双向通道，可以从 channel将数据读入buffer，也可以将buffer的数据写入 channel，而之前的 stream 要么是输入，要么是输出，channel 比 stream 更为底层
 
-![image-20240917164333867](D:\笔记\myblog\whiteRabbit-me.github.io\source\_posts\netty\image-20240917164333867.png)
+![image-20240917164333867](netty\image-20240917164333867.png)
 
 1.常见的Channel有
 
@@ -179,27 +179,27 @@ ByteBuffer 有以下重要属性
 
 一开始
 
-![](D:\笔记\myblog\whiteRabbit-me.github.io\source\_posts\netty\0021.png)
+![](netty\0021.png)
 
 写模式下，position 是写入位置，limit 等于容量，下图表示写入了 4 个字节后的状态
 
-![](D:\笔记\myblog\whiteRabbit-me.github.io\source\_posts\netty\0018.png)
+![](netty\0018.png)
 
 flip 动作发生后，position 切换为读取位置，limit 切换为读取限制
 
-![](D:\笔记\myblog\whiteRabbit-me.github.io\source\_posts\netty\0019.png)
+![](netty\0019.png)
 
 读取 4 个字节后，状态
 
-![](D:\笔记\myblog\whiteRabbit-me.github.io\source\_posts\netty\0020.png)
+![](netty\0020.png)
 
 clear 动作发生后，状态
 
-![](D:\笔记\myblog\whiteRabbit-me.github.io\source\_posts\netty\0021.png)
+![](netty\0021.png)
 
 compact 方法，是把未读完的部分向前压缩，然后切换至写模式
 
-![](D:\笔记\myblog\whiteRabbit-me.github.io\source\_posts\netty\0022.png)
+![](netty\0022.png)
 
 
 
